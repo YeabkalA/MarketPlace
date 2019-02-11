@@ -138,6 +138,7 @@ public class Address {
             );
             return distance;
         } catch (Exception e) {
+            // Failed
             return -1.0;
         }
     }
