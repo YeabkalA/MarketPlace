@@ -1,0 +1,186 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+MERGED from [com.android.support:design:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/92586a2e41b990a94efc6b249f60f8da/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/a84513fe462ab04e639fbb585f4b4588/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/0ede711a74cc60c4b1520feb9f291f56/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b1132fc9572bcfe196fbaaf1970dfb01/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/f0ea036bdae2d7637d28eda42e32aa8a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/2f18ac03b6898930529045ce74b2e85b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/487f1b110b193280f5b942ce9650bf7c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/2f1e82f44bc114a0346726166af98ff6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/37c70b83dac006ff367a709852a9efef/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/ae2292dacd583c7ac22cfd7bde240b63/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/695485bcc86144b9891558d34a5a9768/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/095600373356eff53445d99647e9320d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/644190c7f7f5358f1ae20f39f2e0968a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/62b271fbb39c9cec743f3acc12983b7a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2bd84111c1d877350fbf629ed333a3cf/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/8b6abb4f0b45ce1f5bfe5799eccfeeae/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/51555f336572af0f0fc230de7a2611ce/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/aa135c6f20f0abfc85055673bb238e54/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/00ccd411eb907b126b63caa289e171dd/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4403aee671a4a9e5d3014386660d2fb7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/5f9ac39897670c81eee9593dbc4f16cb/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/0ee5216d9e90297a383f00c6c0158a15/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82603c10b4f97b6e72a8cff4438e5061/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6130123ff9acbc49cecc61b71a01b6d8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/910894fc33c470d4c0851c0e1d06a80b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/7245a6ecedd30375a1f51bf5693c5041/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2d5e7730b047fa486b268bb157fdacb1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/152ec8bd1e28c18825d1379b1ce27e05/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/26d4b28d365ec09e6cd3d1ee6e6a187b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/66e2f7bcf95e84278e474806df7c61f7/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+	package
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:3:5-53
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:1-29:12
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:6:5-71
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:6:22-68
+uses-permission#android.permission.READ_PROFILE
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:7:5-71
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:7:22-68
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:8:5-72
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:8:22-69
+application
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:10:5-27:19
+MERGED from [com.android.support:design:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/92586a2e41b990a94efc6b249f60f8da/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/92586a2e41b990a94efc6b249f60f8da/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/0ede711a74cc60c4b1520feb9f291f56/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/0ede711a74cc60c4b1520feb9f291f56/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/00ccd411eb907b126b63caa289e171dd/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/00ccd411eb907b126b63caa289e171dd/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:13:9-41
+	android:roundIcon
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:14:9-54
+	android:icon
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:12:9-43
+	android:allowBackup
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:11:9-35
+	android:theme
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:16:9-40
+activity#com.example.yeabkalwubshit.marketplace.LoginActivity
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:17:9-25:20
+	android:label
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:19:13-45
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:18:13-42
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:20:13-24:29
+action#android.intent.action.MAIN
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:21:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:23:27-74
+activity#com.example.yeabkalwubshit.marketplace.CreateAccountActivity
+ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:26:9-68
+	android:name
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml:26:19-56
+uses-sdk
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/92586a2e41b990a94efc6b249f60f8da/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/92586a2e41b990a94efc6b249f60f8da/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/a84513fe462ab04e639fbb585f4b4588/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/a84513fe462ab04e639fbb585f4b4588/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/0ede711a74cc60c4b1520feb9f291f56/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/0ede711a74cc60c4b1520feb9f291f56/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b1132fc9572bcfe196fbaaf1970dfb01/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b1132fc9572bcfe196fbaaf1970dfb01/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/f0ea036bdae2d7637d28eda42e32aa8a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/f0ea036bdae2d7637d28eda42e32aa8a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/2f18ac03b6898930529045ce74b2e85b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/2f18ac03b6898930529045ce74b2e85b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/487f1b110b193280f5b942ce9650bf7c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/487f1b110b193280f5b942ce9650bf7c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/2f1e82f44bc114a0346726166af98ff6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/2f1e82f44bc114a0346726166af98ff6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/37c70b83dac006ff367a709852a9efef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/37c70b83dac006ff367a709852a9efef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/ae2292dacd583c7ac22cfd7bde240b63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/ae2292dacd583c7ac22cfd7bde240b63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/695485bcc86144b9891558d34a5a9768/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/695485bcc86144b9891558d34a5a9768/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/095600373356eff53445d99647e9320d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/095600373356eff53445d99647e9320d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/644190c7f7f5358f1ae20f39f2e0968a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/644190c7f7f5358f1ae20f39f2e0968a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/62b271fbb39c9cec743f3acc12983b7a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/62b271fbb39c9cec743f3acc12983b7a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2bd84111c1d877350fbf629ed333a3cf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2bd84111c1d877350fbf629ed333a3cf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/8b6abb4f0b45ce1f5bfe5799eccfeeae/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/8b6abb4f0b45ce1f5bfe5799eccfeeae/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/51555f336572af0f0fc230de7a2611ce/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/51555f336572af0f0fc230de7a2611ce/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/aa135c6f20f0abfc85055673bb238e54/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/aa135c6f20f0abfc85055673bb238e54/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/59707d589b3d4447692ac3f2135781c6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/00ccd411eb907b126b63caa289e171dd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/00ccd411eb907b126b63caa289e171dd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4403aee671a4a9e5d3014386660d2fb7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4403aee671a4a9e5d3014386660d2fb7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/5f9ac39897670c81eee9593dbc4f16cb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/5f9ac39897670c81eee9593dbc4f16cb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/0ee5216d9e90297a383f00c6c0158a15/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/0ee5216d9e90297a383f00c6c0158a15/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82603c10b4f97b6e72a8cff4438e5061/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82603c10b4f97b6e72a8cff4438e5061/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6130123ff9acbc49cecc61b71a01b6d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6130123ff9acbc49cecc61b71a01b6d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/910894fc33c470d4c0851c0e1d06a80b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/910894fc33c470d4c0851c0e1d06a80b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/7245a6ecedd30375a1f51bf5693c5041/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/7245a6ecedd30375a1f51bf5693c5041/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2d5e7730b047fa486b268bb157fdacb1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2d5e7730b047fa486b268bb157fdacb1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/152ec8bd1e28c18825d1379b1ce27e05/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/152ec8bd1e28c18825d1379b1ce27e05/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/26d4b28d365ec09e6cd3d1ee6e6a187b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/26d4b28d365ec09e6cd3d1ee6e6a187b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/66e2f7bcf95e84278e474806df7c61f7/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/66e2f7bcf95e84278e474806df7c61f7/AndroidManifest.xml:20:5-44
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/src/main/AndroidManifest.xml
