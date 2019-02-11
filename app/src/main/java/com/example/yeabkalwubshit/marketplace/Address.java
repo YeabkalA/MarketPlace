@@ -4,6 +4,7 @@ import android.widget.LinearLayout;
 
 public class Address {
 
+    // Builder class for Address.
     static class Builder {
         Address address;
         public Builder() {
