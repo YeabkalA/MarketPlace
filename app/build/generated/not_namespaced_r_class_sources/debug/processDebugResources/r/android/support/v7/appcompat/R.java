@@ -643,11 +643,11 @@ public final class R {
         public static final int async = 0x7f09001e;
         public static final int blocking = 0x7f090022;
         public static final int bottom = 0x7f090023;
-        public static final int buttonPanel = 0x7f090025;
-        public static final int checkbox = 0x7f09002a;
-        public static final int chronometer = 0x7f09002b;
-        public static final int content = 0x7f090030;
-        public static final int contentPanel = 0x7f090031;
+        public static final int buttonPanel = 0x7f090024;
+        public static final int checkbox = 0x7f090029;
+        public static final int chronometer = 0x7f09002a;
+        public static final int content = 0x7f09002f;
+        public static final int contentPanel = 0x7f090030;
         public static final int custom = 0x7f090034;
         public static final int customPanel = 0x7f090035;
         public static final int decor_content_parent = 0x7f090036;
@@ -818,8 +818,8 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0f0024;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0f0025;
         public static final int abc_toolbar_collapse_description = 0x7f0f0026;
-        public static final int search_menu_title = 0x7f0f004c;
-        public static final int status_bar_notification_info_overflow = 0x7f0f004d;
+        public static final int search_menu_title = 0x7f0f004d;
+        public static final int status_bar_notification_info_overflow = 0x7f0f004e;
     }
     public static final class style {
         private style() {}

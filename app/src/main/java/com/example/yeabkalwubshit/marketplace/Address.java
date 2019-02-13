@@ -2,7 +2,7 @@ package com.example.yeabkalwubshit.marketplace;
 
 public class Address {
 
-    // Builder class for Address.
+    // Builder class for `Address`.
     static class Builder {
         Address address;
         public Builder() {
@@ -117,9 +117,9 @@ public class Address {
     }
 
     public boolean isValid() {
+        // `line2` is optional, so it's not being checked.
         return isValidZipCode(this.zip)
                 && this.line1.length() != 0
-                && this.line2.length() != 0
                 && this.city.length() != 0
                 && this.state.length() != 0
                 && this.country.length() != 0

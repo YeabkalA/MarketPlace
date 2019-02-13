@@ -80,4 +80,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="action_settings">Settings</string>
     <string name="lead_to_signup">Don\'t account? Create one.</string>
+
+    // Address related texts
+    <string name="country_usa">USA</string>
 </resources>

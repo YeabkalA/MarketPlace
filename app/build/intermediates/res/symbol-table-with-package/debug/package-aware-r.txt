@@ -1067,7 +1067,6 @@ id barrier
 id beginning
 id blocking
 id bottom
-id button
 id buttonPanel
 id center
 id center_horizontal
@@ -1082,6 +1081,7 @@ id container
 id content
 id contentPanel
 id coordinator
+id createAccountButton
 id createAccountText
 id custom
 id customPanel
@@ -1383,6 +1383,7 @@ string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_pattern
+string country_usa
 string error_field_required
 string error_incorrect_password
 string error_invalid_email
