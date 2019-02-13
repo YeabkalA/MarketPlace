@@ -1,7 +1,5 @@
 package com.example.yeabkalwubshit.marketplace;
 
-import android.widget.LinearLayout;
-
 public class Address {
 
     // Builder class for Address.
@@ -128,7 +126,7 @@ public class Address {
                 && this.zip.length() != 0;
     }
 
-    public Double calculateDistanceTo(Address second, String units) throws Exception {
+    public Double calculateDistanceTo(Address second, String units) {
         if(!second.isValid()) {
             return -1.0;
         }

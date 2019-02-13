@@ -73,7 +73,7 @@ public class AddressTest {
     }
 
     @Test
-    public void successfulDistanceCalculation() throws Exception {
+    public void successfulDistanceCalculation() {
         Address address1 = new Address.Builder()
                 .setLine1(LINE1)
                 .setLine2(LINE2)

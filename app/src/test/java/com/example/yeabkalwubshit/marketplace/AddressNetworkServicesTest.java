@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AddressNetworkServicesTest {
     @Test
-    public void successfulDistanceCalculation() throws Exception{
+    public void successfulDistanceCalculation() {
         Double distance = AddressNetworkServices.getDistanceBetweenTwoZips("75024",
                 "75062", "km");
         // Successful distance computations gives a non-negative number.

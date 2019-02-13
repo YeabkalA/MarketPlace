@@ -2,11 +2,9 @@ package com.example.yeabkalwubshit.marketplace;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import org.json.*;
 
 
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class AddressNetworkServices {
@@ -22,8 +20,7 @@ public class AddressNetworkServices {
         return requestUrl;
     }
 
-    static Double getDistanceBetweenTwoZips(String zip1, String zip2, String units)
-                                                                throws Exception {
+    static Double getDistanceBetweenTwoZips(String zip1, String zip2, String units) {
         try {
             String requestUrl = buildRequest(zip1, zip2, units);
             URL obj = new URL(requestUrl);
