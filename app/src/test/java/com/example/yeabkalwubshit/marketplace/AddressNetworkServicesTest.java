@@ -9,6 +9,7 @@ public class AddressNetworkServicesTest {
     public void successfulDistanceCalculation() {
         Double distance = AddressNetworkServices.getDistanceBetweenTwoZips("75024",
                 "75062", "km");
+        System.out.println(distance);
         // Successful distance computations gives a non-negative number.
         assertTrue(distance >= 0);
     }
