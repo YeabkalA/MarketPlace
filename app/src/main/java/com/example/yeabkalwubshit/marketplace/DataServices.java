@@ -19,25 +19,7 @@ public class DataServices {
     static FirebaseAuth mAuth;
 
     public static void createUser(final User user, String password, final Context context) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            FirebaseUser currentUser = task.getResult().getUser();
-                            myRef.child("users").child(currentUser.getUid())
-                                    .setValue(user.createMap());
-                            Toast.makeText(context, "Successfully created account for "
-                                            + user.getEmail(),
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, "Authentication Failed",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-        );
+
 
     }
 }

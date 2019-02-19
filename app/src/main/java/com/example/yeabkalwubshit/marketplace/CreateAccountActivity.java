@@ -1,5 +1,7 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -23,6 +36,11 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText mNewPassword;
     private EditText mNewPasswordAgain;
     private Button mCreateAccountButton;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +74,36 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(!validInputs) {
                     return;
                 }
-                User user = createUser();
+                final User user = createUser();
                 if(user != null && user.isValid()) {
                     System.out.println(user.createMap());
                     // TODO(yeabkal) try auth new user.
                     String password1 = mNewPassword.getText().toString();
                     String password2 = mNewPasswordAgain.getText().toString();
                     if(PasswordUtil.validatePassword(password1, password2)) {
-                        DataServices.createUser(user, password1, getApplicationContext());
+                        mAuth = FirebaseAuth.getInstance();
+                        mAuth.createUserWithEmailAndPassword(user.getEmail(), password1)
+                                .addOnCompleteListener(
+                                new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if(task.isSuccessful()) {
+                                            FirebaseUser currentUser = task.getResult().getUser();
+                                            myRef.child("users").child(currentUser.getUid())
+                                                    .setValue(user.createMap());
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Successfully created account for "
+                                                            + user.getEmail(),
+                                                    Toast.LENGTH_LONG).show();
+                                            goToHomepage();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Authentication Failed",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }
+                        );
                     }
                 }
             }
@@ -83,6 +123,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         String city = mCity.getText().toString();
         String state = mState.getSelectedItem().toString();
         String zip = mZip.getText().toString();
+
+        String password1 = mNewPassword.getText().toString();
+        String password2 = mNewPasswordAgain.getText().toString();
 
         if(TextUtils.isEmpty(firstName)) {
             mFirstName.setError("First name is a required field.");
@@ -135,6 +178,18 @@ public class CreateAccountActivity extends AppCompatActivity {
             validInputs = false;
         }
 
+        if(TextUtils.isEmpty(password1)) {
+            mNewPassword.setError("Password is required");
+        } else {
+            if(password1.length() < 4) {
+                mNewPassword.setError("Password must be at least 4 characters long.");
+            } else {
+                if(!PasswordUtil.validatePassword(password1, password2)) {
+                    mNewPasswordAgain.setError("New passwords should match.");
+                }
+            }
+        }
+
         return validInputs;
     }
 
@@ -182,4 +237,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         return null;
     }
 
+    private void goToHomepage() {
+        Intent intent = new Intent(CreateAccountActivity.this,
+                LoginActivity.class);
+        startActivity(intent);
+    }
 }
