@@ -1,13 +1,17 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import java.util.HashMap;
+
 public class Address {
 
     // Builder class for `Address`.
     static class Builder {
-        Address address;
+        private Address address;
+
         public Builder() {
             this.address = new Address();
         }
+
         public Builder setLine1(String line1) {
             this.address.setLine1(line1);
             return this;
@@ -100,7 +104,7 @@ public class Address {
         this.city = "";
         this.state = "";
         this.country = "";
-        this.state = "";
+        this.zip = "";
     }
 
     public static boolean isValidZipCode(String text) {
@@ -122,7 +126,6 @@ public class Address {
                 && this.line1.length() != 0
                 && this.city.length() != 0
                 && this.state.length() != 0
-                && this.country.length() != 0
                 && this.zip.length() != 0;
     }
 
@@ -142,4 +145,13 @@ public class Address {
         }
     }
 
+    public HashMap<String, Object> createMap() {
+        HashMap<String, Object> ret = new HashMap<>();
+        ret.put("line1", line1);
+        ret.put("line2", line2);
+        ret.put("city", city);
+        ret.put("state", state);
+        ret.put("zip", zip);
+        return ret;
+    }
 }

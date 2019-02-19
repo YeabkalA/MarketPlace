@@ -1139,8 +1139,6 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
-id editText
-id editText2
 id edit_query
 id email
 id email_login_form
@@ -1193,6 +1191,8 @@ id mtrl_internal_children_alpha_tag
 id multiply
 id navigation_header_container
 id never
+id newPassword
+id newPasswordAgain
 id none
 id normal
 id notification_background
