@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/5b7c5493a5002e310ad042cf3d325cfb/res/values-fr-rCA/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "251",
-                        "endColumns": "219",
-                        "endOffsets": "470"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4100",
-                        "endColumns": "219",
-                        "endOffsets": "4315"
-                    }
-                },
-                {
-                    "source": "/Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/0e92a18985be3de371f2d44caa97babe/res/values-fr-rCA/values.xml",
+                    "source": "/Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/1e97e0bc278824c256a66407cf3e787a/res/values-fr-rCA/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -69,6 +52,23 @@
                         "startOffsets": "105,216,331,442,529,645,775,858,938,1029,1122,1221,1316,1417,1510,1603,1698,1789,1880,1976,2086,2198,2301,2412,2519,2621,2780,5780",
                         "endColumns": "110,114,110,86,115,129,82,79,90,92,98,94,100,92,92,94,90,90,95,109,111,102,110,106,101,158,98,85",
                         "endOffsets": "211,326,437,524,640,770,853,933,1024,1117,1216,1311,1412,1505,1598,1693,1784,1875,1971,2081,2193,2296,2407,2514,2616,2775,2874,5861"
+                    }
+                },
+                {
+                    "source": "/Users/yeabkalwubshit/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/af239b587defc7ba5dac8ebb08357378/res/values-fr-rCA/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "251",
+                        "endColumns": "219",
+                        "endOffsets": "470"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "4100",
+                        "endColumns": "219",
+                        "endOffsets": "4315"
                     }
                 }
             ]

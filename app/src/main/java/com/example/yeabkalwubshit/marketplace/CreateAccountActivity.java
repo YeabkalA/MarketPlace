@@ -62,6 +62,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                     // TODO(yeabkal) try auth new user.
                     String password1 = mNewPassword.getText().toString();
                     String password2 = mNewPasswordAgain.getText().toString();
+                    if(PasswordUtil.validatePassword(password1, password2)) {
+                        DataServices.createUser(user, password1, getApplicationContext());
+                    }
                 }
             }
         });

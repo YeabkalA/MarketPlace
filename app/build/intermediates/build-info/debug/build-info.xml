@@ -2,56 +2,65 @@
 <instant-run
     abi="x86"
     api-level="28"
-    build-mode="COLD"
+    build-mode="HOT_WARM"
     density="xhdpi"
     format="10"
-    ir-eligibility="COMPATIBLE"
     plugin-version="3.2.1"
-    timestamp="1550550670771"
+    timestamp="1550555768388"
     token="-1203270744126696020"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="273" />
+        duration="165" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="7" />
     <task
         name="instant-run-transform"
-        duration="38" />
+        duration="19" />
     <task
         name="verifier"
-        duration="19" />
+        duration="2" />
 
     <artifact
-        location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-        type="SPLIT" />
+        location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
-        timestamp="1550550007719"
-        verifier="FULL_BUILD_REQUESTED" >
+        ir-eligibility="CLASS_ADDED"
+        timestamp="1550554328095"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
             type="SPLIT" />
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
             type="SPLIT" />
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
             type="SPLIT" />
         <artifact
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            type="SPLIT" />
+        <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
             type="SPLIT" />
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
@@ -62,24 +71,23 @@
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />
-        <artifact
-            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
-            type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1550550670771"
+        ir-eligibility="METHOD_DELETED"
+        timestamp="1550555635628"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1550555768388"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/yeabkalwubshit/AndroidStudioProjects/MarketPlace/app/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
