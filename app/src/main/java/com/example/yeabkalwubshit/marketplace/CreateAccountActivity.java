@@ -60,6 +60,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(user != null && user.isValid()) {
                     System.out.println(user.createMap());
                     // TODO(yeabkal) try auth new user.
+                    String password1 = mNewPassword.getText().toString();
+                    String password2 = mNewPasswordAgain.getText().toString();
                 }
             }
         });
