@@ -85,4 +85,7 @@
 
     // Address related texts
     <string name="country_usa">USA</string>
+
+    // Menu Resources
+    <string name="action_search">Search Item...</string>
 </resources>

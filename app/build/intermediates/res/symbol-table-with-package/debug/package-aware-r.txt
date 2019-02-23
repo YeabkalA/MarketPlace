@@ -1053,6 +1053,7 @@ drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_search_black_24dp
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
@@ -1087,12 +1088,14 @@ id action_bar_title
 id action_container
 id action_context_bar
 id action_divider
+id action_history
 id action_image
 id action_menu_divider
 id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_search
 id action_settings
 id action_text
 id actions
@@ -1389,6 +1392,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu menu_feed
 menu menu_sign_up
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -1431,6 +1435,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_search
 string action_settings
 string action_sign_in
 string action_sign_in_short
