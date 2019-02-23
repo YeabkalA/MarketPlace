@@ -1352,6 +1352,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_create_account
+layout activity_feed
 layout activity_login
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

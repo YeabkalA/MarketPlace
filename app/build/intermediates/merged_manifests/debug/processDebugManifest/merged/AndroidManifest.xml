@@ -41,6 +41,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.yeabkalwubshit.marketplace.CreateAccountActivity" />
+        <activity android:name="com.example.yeabkalwubshit.marketplace.Feed" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
             android:excludeFromRecents="true"
