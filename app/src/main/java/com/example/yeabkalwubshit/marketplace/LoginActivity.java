@@ -361,7 +361,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void openFeeds(String uid) {
         Intent intent = new Intent(LoginActivity.this, Feed.class);
-        Feed.uid = uid;
         startActivity(intent);
     }
 

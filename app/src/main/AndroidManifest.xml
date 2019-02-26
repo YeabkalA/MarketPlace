@@ -7,21 +7,17 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-
-
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
-            android:authorities="com.example.yeabkalwubshit.marketplace.SampleRecentSuggestionProvider"
-            android:name=".SampleRecentSuggestionProvider" >
-        </provider>
+            android:name=".SampleRecentSuggestionProvider"
+            android:authorities="com.example.yeabkalwubshit.marketplace.SampleRecentSuggestionProvider"></provider>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -32,7 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".Feed"></activity>
+        <activity android:name=".Feed" />
+        <activity android:name=".PostItemActivity"></activity>
     </application>
 
 </manifest>

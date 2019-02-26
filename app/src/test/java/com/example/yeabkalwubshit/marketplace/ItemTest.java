@@ -3,7 +3,6 @@ package com.example.yeabkalwubshit.marketplace;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ItemTest {
@@ -13,6 +12,7 @@ public class ItemTest {
     private static String OWNER_ID = "abcdedfgh";
     private static String OWNER_ZIP = "12345";
     private static Long PRICE_IN_CENTS = 1234L;
+    private static String CONDITION = "NEW";
 
     private static Item ITEM;
 
@@ -25,6 +25,7 @@ public class ItemTest {
                 .setOwnerZip(OWNER_ZIP)
                 .setPriceInCents(PRICE_IN_CENTS)
                 .setTitle(TITLE)
+                .setCondition(CONDITION)
                 .build();
     }
 

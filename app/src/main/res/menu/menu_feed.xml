@@ -15,6 +15,6 @@
     <item
         android:id="@+id/action_history"
         android:orderInCategory="100"
-        android:title="Test"
+        android:title="Add Item"
         app:showAsAction="never" />
 </menu>

@@ -1,6 +1,7 @@
 package com.example.yeabkalwubshit.marketplace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SearchRecentSuggestionsProvider;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -19,8 +20,6 @@ import android.widget.SearchView;
 
 public class Feed extends AppCompatActivity {
 
-    static String uid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +29,6 @@ public class Feed extends AppCompatActivity {
         int darkerColor = Color.rgb(30,30,30);
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         getWindow().setStatusBarColor(darkerColor);
-
-        System.out.println("Got user with uid : " + uid);
-
     }
 
     @Override
@@ -64,7 +60,19 @@ public class Feed extends AppCompatActivity {
 
         MenuItem item = menu.getItem(1);
         item.setVisible(true);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                openPostItem();
+                return true;
+            }
+        });
         return true;
 
+    }
+
+    void openPostItem() {
+        Intent intent = new Intent(Feed.this, PostItemActivity.class);
+        startActivity(intent);
     }
 }

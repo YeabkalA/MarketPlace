@@ -88,4 +88,13 @@
 
     // Menu Resources
     <string name="action_search">Search Item...</string>
+
+    // Item Resources
+    <string name="item_description">Item Description</string>
+    <string name="item_title">Item Title</string>
+    <string name="item_price">Price Tag</string>
+    <string name="post_item">Post</string>
+    <string name="condition_heading">Condition</string>
+    <string name="condition_new">New</string>
+    <string name="condition_used">Used</string>
 </resources>

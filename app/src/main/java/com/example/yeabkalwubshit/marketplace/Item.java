@@ -1,8 +1,14 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import android.text.TextUtils;
+
+import java.util.HashMap;
+
 public class Item {
+
     private String id;
     private String description;
+    private String condition;
     private String ownerId;
     private String imageURL;
     private String title;
@@ -22,6 +28,11 @@ public class Item {
 
         public Builder setDescription(String description) {
             this.item.description = description;
+            return this;
+        }
+
+        public Builder setCondition(String condition) {
+            this.item.condition = condition;
             return this;
         }
 
@@ -109,8 +120,49 @@ public class Item {
         this.ownerZip = ownerZip;
     }
 
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     public static String getDollarRepresentation(Long cents) {
         return Double.toString(cents/(100.0));
+    }
+
+    public boolean isValidCondition() {
+        return this.condition.equals("NEW") || this.condition.equals("USED");
+    }
+
+    public HashMap<String, Object> createMap() {
+        HashMap<String, Object> ret = new HashMap<>();
+        if(id != null) {
+            ret.put("id", id);
+        }
+        if(title != null) {
+            ret.put("title", title);
+        }
+        if(description != null) {
+            ret.put("description", description);
+        }
+        if(priceInCents != null) {
+            ret.put("priceInCents", priceInCents);
+        }
+        if(ownerId != null) {
+            ret.put("owner_id", ownerId);
+        }
+        if(ownerZip != null) {
+            ret.put("owner_zip", ownerZip);
+        }
+        if(imageURL != null) {
+            ret.put("imageURL", imageURL);
+        }
+        if(condition != null) {
+            ret.put("condition", condition);
+        }
+        return ret;
     }
 
 }
