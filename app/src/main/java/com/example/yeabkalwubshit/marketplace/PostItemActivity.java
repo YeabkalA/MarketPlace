@@ -113,7 +113,8 @@ public class PostItemActivity extends AppCompatActivity {
                                                 mDbRef.child("users").child(uid).child("items")
                                                         .child(Long.toString(nextId))
                                                         .setValue(todayStr);
-                                                uploadImage(PostItemActivity.this);
+                                                uploadImage(PostItemActivity.this,
+                                                        Long.toString(nextId));
                                             }
                                         }
                                     }
@@ -193,7 +194,7 @@ public class PostItemActivity extends AppCompatActivity {
                 PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(Activity act) {
+    private void uploadImage(Activity act, String imageId) {
         if(filePath != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
@@ -201,7 +202,7 @@ public class PostItemActivity extends AppCompatActivity {
             dialog.show();
             dialog.setTitle("Creating your item...");
 
-            ref.child("images/s").putFile(filePath)
+            ref.child(getImagePathString(imageId)).putFile(filePath)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -240,5 +241,9 @@ public class PostItemActivity extends AppCompatActivity {
 //            }
         }
 
+    }
+
+    private String getImagePathString(String itemId) {
+        return "images/" + itemId;
     }
 }
