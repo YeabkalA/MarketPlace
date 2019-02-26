@@ -100,4 +100,6 @@
     <string name="condition_used">Used</string>
     <string name="image">Image</string>
     <string name="upload_image">Upload Image</string>
+    <string name="title_and_desc">Title and Description</string>
+    <string name="price">Price</string>
 </resources>

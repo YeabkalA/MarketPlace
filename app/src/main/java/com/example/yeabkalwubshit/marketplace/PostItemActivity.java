@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,6 +52,7 @@ public class PostItemActivity extends AppCompatActivity {
 
     private ImageView mImage;
     private Uri filePath;
+    private TextView mImageDesc;
 
     private final int PICK_IMAGE_REQUEST = 71;
 
@@ -63,8 +65,8 @@ public class PostItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_item);
 
         ActionBar actionBar = getSupportActionBar();
-        int actionBarColor = Color.rgb(40,60,250);
-        int darkerColor = Color.rgb(10,30,200);
+        int actionBarColor = Color.rgb(40, 150, 8);
+        int darkerColor = Color.rgb(30, 145, 8);
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         setTitle("Add Item");
         getWindow().setStatusBarColor(darkerColor);
@@ -111,7 +113,7 @@ public class PostItemActivity extends AppCompatActivity {
                                                 mDbRef.child("users").child(uid).child("items")
                                                         .child(Long.toString(nextId))
                                                         .setValue(todayStr);
-                                                uploadImage(PostItemActivity.this, true);
+                                                uploadImage(PostItemActivity.this);
                                             }
                                         }
                                     }
@@ -138,6 +140,7 @@ public class PostItemActivity extends AppCompatActivity {
         mUsedBtn.setChecked(true);
         mUploadImageBtn = findViewById(R.id.uploadImageBtn);
         mImage = findViewById(R.id.img);
+        mImageDesc = findViewById(R.id.imageDesc);
     }
 
     Item setItem(Long id) {
@@ -190,7 +193,7 @@ public class PostItemActivity extends AppCompatActivity {
                 PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(Activity act, boolean show) {
+    private void uploadImage(Activity act) {
         if(filePath != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
@@ -227,12 +230,14 @@ public class PostItemActivity extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                mImage.setImageBitmap(bitmap);
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
+            mImageDesc.setText("Image uploaded");
+//            try {
+////                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+////                mImage.setImageBitmap(bitmap);
+//                mImageDesc.setText("Image uploaded");
+//            } catch(IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
     }
