@@ -47,14 +47,22 @@ public class PostItemActivity extends AppCompatActivity {
                                         if(dataSnapshot != null) {
                                             FirebaseAuth mAuth = FirebaseAuth.getInstance();
                                             Long nextId = (Long) dataSnapshot.getValue();
-                                            mDbRef.child("items")
-                                                    .child("next_item_id")
-                                                    .setValue(nextId + 1);
+
                                             Item item = setItem(nextId);
                                             if(item != null) {
-                                                item.setOwnerId(mAuth.getUid());
+                                                String uid = mAuth.getUid();
+                                                item.setOwnerId(uid);
+                                                mDbRef.child("items")
+                                                        .child("next_item_id")
+                                                        .setValue(nextId + 1);
+                                                DateUtil dateUtil = new DateUtil();
+                                                String todayStr = dateUtil.today();
+                                                item.setPostedOn(todayStr);
                                                 mDbRef.child("items").child(item.getId())
                                                         .setValue(item.createMap());
+                                                mDbRef.child("users").child(uid).child("items")
+                                                        .child(Long.toString(nextId))
+                                                        .setValue(todayStr);
                                             }
                                         }
                                     }

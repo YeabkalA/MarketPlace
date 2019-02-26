@@ -15,6 +15,8 @@ public class Item {
     private Long priceInCents;
     private String ownerZip;
 
+    private String postedOn;
+
     // Builder for item.
     static class Builder {
         private Item item;
@@ -53,6 +55,11 @@ public class Item {
 
         public Builder setOwnerZip(String ownerZip) {
             this.item.ownerZip = ownerZip;
+            return this;
+        }
+
+        public Builder setPostedOn(String postedOnDate) {
+            this.item.postedOn = postedOnDate;
             return this;
         }
 
@@ -128,6 +135,14 @@ public class Item {
         this.condition = condition;
     }
 
+    public String getPostedOn() {
+        return postedOn;
+    }
+
+    public void setPostedOn(String postedOn) {
+        this.postedOn = postedOn;
+    }
+
     public static String getDollarRepresentation(Long cents) {
         return Double.toString(cents/(100.0));
     }
@@ -161,6 +176,9 @@ public class Item {
         }
         if(condition != null) {
             ret.put("condition", condition);
+        }
+        if(postedOn != null) {
+            ret.put("postedOn", postedOn);
         }
         return ret;
     }
