@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    private FirebaseAuth mAuth;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -61,6 +64,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Check if user exists and lead to Feed page.
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null) {
+            openFeeds(mAuth.getUid());
+        }
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -77,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -329,7 +338,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                openFeeds();
+                openFeeds(mAuth.getUid());
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -350,8 +359,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         startActivity(intent);
     }
 
-    private void openFeeds() {
+    private void openFeeds(String uid) {
         Intent intent = new Intent(LoginActivity.this, Feed.class);
+        Feed.uid = uid;
         startActivity(intent);
     }
 

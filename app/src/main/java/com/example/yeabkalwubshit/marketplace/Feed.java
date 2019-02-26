@@ -1,18 +1,38 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import android.content.Context;
+import android.content.SearchRecentSuggestionsProvider;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.SearchView;
 
 public class Feed extends AppCompatActivity {
+
+    static String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        ActionBar actionBar = getSupportActionBar();
+        int actionBarColor = Color.rgb(100,100,100);
+        int darkerColor = Color.rgb(30,30,30);
+        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
+        getWindow().setStatusBarColor(darkerColor);
+
+        System.out.println("Got user with uid : " + uid);
+
     }
 
     @Override
@@ -20,11 +40,17 @@ public class Feed extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_feed, menu);
         SearchView searchView = (SearchView)menu.getItem(0).getActionView();
 
-        searchView.setOnQueryTextListener(
+        searchView.
+                setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
                         System.out.println("Tried searching " + query);
+                        SearchRecentSuggestions suggestions =
+                                new SearchRecentSuggestions(getApplicationContext(),
+                                        SampleRecentSuggestionProvider.AUTHORITY,
+                                        SampleRecentSuggestionProvider.MODE);
+                        suggestions.saveRecentQuery(query, null);
                         return false;
                     }
 
