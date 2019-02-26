@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Feed extends AppCompatActivity {
 
@@ -25,8 +28,8 @@ public class Feed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         ActionBar actionBar = getSupportActionBar();
-        int actionBarColor = Color.rgb(100,100,100);
-        int darkerColor = Color.rgb(30,30,30);
+        int actionBarColor = Color.rgb(40,60,250);
+        int darkerColor = Color.rgb(10,30,200);
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         getWindow().setStatusBarColor(darkerColor);
     }
@@ -58,12 +61,26 @@ public class Feed extends AppCompatActivity {
                 }
         );
 
-        MenuItem item = menu.getItem(1);
-        item.setVisible(true);
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem postItemPage = menu.getItem(1);
+        postItemPage.setVisible(true);
+        postItemPage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 openPostItem();
+                return true;
+            }
+        });
+
+        MenuItem signOutBtn = menu.getItem(2);
+        signOutBtn.setVisible(true);
+        signOutBtn.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getApplicationContext(),
+                        "Successfully signed out.",
+                        Toast.LENGTH_LONG).show();
+                goToHomePage();
                 return true;
             }
         });
@@ -73,6 +90,11 @@ public class Feed extends AppCompatActivity {
 
     void openPostItem() {
         Intent intent = new Intent(Feed.this, PostItemActivity.class);
+        startActivity(intent);
+    }
+
+    void goToHomePage() {
+        Intent intent = new Intent(Feed.this, LoginActivity.class);
         startActivity(intent);
     }
 }

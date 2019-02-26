@@ -13,8 +13,14 @@
 
         />
     <item
-        android:id="@+id/action_history"
+        android:id="@+id/action_post_item"
         android:orderInCategory="100"
         android:title="Add Item"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_out_to_homepage"
+        android:orderInCategory="100"
+        android:title="Sign Out"
         app:showAsAction="never" />
 </menu>

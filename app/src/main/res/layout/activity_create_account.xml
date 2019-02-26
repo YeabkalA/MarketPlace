@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
 
 
     <LinearLayout
@@ -19,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name_and_contact_info"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -33,7 +35,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/prompt_email"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
@@ -50,7 +55,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/prompt_first_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white"
+                android:textStyle="italic"/>
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +72,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/prompt_last_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white"
+                android:textStyle="italic"/>
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +89,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/prompt_phone_number"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white"
+                android:textStyle="italic"/>
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +105,9 @@
                 android:layout_height="20dp"
                 android:text="@string/address"
                 android:textAlignment="gravity"
-                android:textStyle="bold" />
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,7 +121,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/address_street1"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"/>
 
             </LinearLayout>
 
@@ -125,7 +140,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/address_street2"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"/>
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +157,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/address_city"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"/>
 
             </LinearLayout>
 
@@ -157,20 +176,24 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/address_zip_code"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"/>
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/address_state" />
+                    android:text="@string/address_state"
+                    android:textColor="@android:color/white"/>
 
                 <Spinner
                     android:id="@+id/signUpState"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -187,7 +210,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/require_password_creation"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textStyle="italic"/>
         </LinearLayout>
 
         <LinearLayout
@@ -202,7 +227,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/require_password_creation_again"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textStyle="italic"/>
         </LinearLayout>
 
         <Button
@@ -210,6 +237,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/sign_up" />
     </LinearLayout>
 </ScrollView>

@@ -5,73 +5,109 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PostItemActivity">
-
-    <EditText
-        android:id="@+id/itemTitle"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/item_title"
-        android:inputType="textPersonName" />
+        android:orientation="vertical"
+        tools:context=".PostItemActivity"
+        android:paddingLeft="30dp"
+        android:paddingTop="12dp"
+        android:paddingRight="30dp">
 
-    <EditText
-        android:id="@+id/itemDescription"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:ems="10"
-        android:hint="@string/item_description"
-        android:inputType="textMultiLine"/>
-
-    <EditText
-        android:id="@+id/itemPriceTag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/item_price"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/condition_heading" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioGroup
+        <EditText
+            android:id="@+id/itemTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/item_title"
+            android:inputType="textPersonName" />
 
-            <RadioButton
-                android:id="@+id/newBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/condition_new" />
+        <EditText
+            android:id="@+id/itemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:ems="10"
+            android:hint="@string/item_description"
+            android:inputType="textMultiLine" />
 
-            <RadioButton
-                android:id="@+id/usedBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/itemPriceTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/item_price"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/uploadImageBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_image" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="@string/condition_used" />
-        </RadioGroup>
+                app:srcCompat="@android:color/background_light" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/condition_heading" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/newBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/condition_new" />
+
+                <RadioButton
+                    android:id="@+id/usedBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/condition_used" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/postItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/post_item" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/postItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/post_item" />
-</LinearLayout>
 </ScrollView>

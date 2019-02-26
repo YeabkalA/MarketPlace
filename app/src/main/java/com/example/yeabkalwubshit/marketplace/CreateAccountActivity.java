@@ -1,7 +1,10 @@
 package com.example.yeabkalwubshit.marketplace;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,6 +49,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        ActionBar actionBar = getSupportActionBar();
+        int actionBarColor = Color.rgb(40,60,250);
+        int darkerColor = Color.rgb(10,30,200);
+        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
+        setTitle("Create Account");
+        getWindow().setStatusBarColor(darkerColor);
+
 
         mEmail = findViewById(R.id.signUpEmail);
         mFirstName = findViewById(R.id.signUpFirstName);
