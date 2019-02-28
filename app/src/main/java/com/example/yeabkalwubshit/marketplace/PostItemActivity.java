@@ -221,7 +221,6 @@ public class PostItemActivity extends AppCompatActivity {
             });
         } else {
             Toast.makeText(PostItemActivity.this, "NO ITEM", Toast.LENGTH_LONG);
-
         }
     }
 
