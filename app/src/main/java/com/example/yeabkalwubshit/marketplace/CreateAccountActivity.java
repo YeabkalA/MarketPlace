@@ -62,6 +62,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     StorageReference ref;
 
+    private DateUtil dateUtil;
+
     private final int PICK_IMAGE_REQUEST = 71;
 
     private boolean imageUploaded = false;
@@ -77,6 +79,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         setTitle("Create Account");
         getWindow().setStatusBarColor(darkerColor);
+
+        dateUtil = new DateUtil();
 
         firebaseStorage = FirebaseStorage.getInstance();
         ref = firebaseStorage.getReference();
@@ -127,6 +131,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                     return;
                 }
                 final User user = createUser();
+                String todayStr = dateUtil.today();
+                user.setCreatedOn(todayStr);
                 if(user != null && user.isValid()) {
                     System.out.println(user.createMap());
                     // TODO(yeabkal) try auth new user.

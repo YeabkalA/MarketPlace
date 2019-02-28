@@ -14,7 +14,6 @@ public class Item {
     private String title;
     private Long priceInCents;
     private String ownerZip;
-
     private String postedOn;
 
     // Builder for item.

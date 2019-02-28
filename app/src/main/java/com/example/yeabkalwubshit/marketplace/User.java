@@ -11,6 +11,8 @@ public class User {
 
     private String imageUrl;
 
+    private String createdOn;
+
     static class Builder {
         private User user;
 
@@ -34,6 +36,11 @@ public class User {
         }
         public Builder setPhoneNumber(String phoneNumber) {
             this.user.setPhoneNumber(phoneNumber);
+            return this;
+        }
+
+        public Builder setCreatedOn(String createdOn) {
+            this.user.createdOn = createdOn;
             return this;
         }
 
@@ -71,6 +78,8 @@ public class User {
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
+    public void setCreatedOn(String createdOn) { this.createdOn = createdOn; }
+
     public String getFirstName() {
 
         return firstName;
@@ -94,6 +103,8 @@ public class User {
 
     public String getImageUrl() { return imageUrl; }
 
+    public String getCreatedOn() { return createdOn; }
+
     public HashMap<String, Object> createMap() {
         System.out.println("Trying to make map");
         HashMap<String, Object> ret = new HashMap<>();
@@ -102,6 +113,7 @@ public class User {
         ret.put("phoneNumber", phoneNumber);
         ret.put("email", email);
         ret.put("address", address.createMap());
+        ret.put("createdOn", createdOn);
         if(imageUrl != null && imageUrl.length() != 0) {
             ret.put("imageUrl", imageUrl);
         }
