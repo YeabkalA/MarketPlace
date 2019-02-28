@@ -182,4 +182,16 @@ public class Item {
         return ret;
     }
 
+    public boolean populateFromMap(HashMap<String, Object> map) {
+        String title = (String) map.get("title");
+        String desc = (String) map.get("description");
+        Long price = (Long) map.get("priceInCents");
+
+        setTitle(title);
+        setDescription(desc);
+        setPriceInCents(price);
+
+        return true;
+    }
+
 }
