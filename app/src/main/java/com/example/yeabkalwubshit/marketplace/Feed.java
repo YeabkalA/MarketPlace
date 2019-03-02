@@ -206,8 +206,8 @@ public class Feed extends AppCompatActivity {
             title.setText(item.getTitle());
             desc.setText(item.getDescription());
             long priceVal = item.getPriceInCents();
-            double priceDisp = priceVal/100.0;
-            price.setText("$"+Double.toString(priceDisp));
+            String priceDisp = Item.getDollarRepresentation(priceVal);
+            price.setText("$"+priceDisp);
 
 
             if(item.getImageURL() != null && !item.getImageURL().equals("")) {
