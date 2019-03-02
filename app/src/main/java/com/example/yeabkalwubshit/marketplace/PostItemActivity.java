@@ -118,6 +118,11 @@ public class PostItemActivity extends AppCompatActivity {
                                                         .child(Long.toString(nextId))
                                                         .setValue(todayStr);
                                                 uploadImage(PostItemActivity.this, imageUrl);
+
+                                                String successText = "Successfully created item - " + item.getTitle();
+                                                Toast.makeText(PostItemActivity.this, successText,
+                                                        Toast.LENGTH_LONG).show();
+                                                openFeeds();
                                             }
                                         }
                                     }
@@ -189,6 +194,11 @@ public class PostItemActivity extends AppCompatActivity {
         return item;
     }
 
+    private void openFeeds() {
+        Intent intent = new Intent(PostItemActivity.this, Feed.class);
+        startActivity(intent);
+    }
+
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -244,6 +254,8 @@ public class PostItemActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     private String getImagePathString(String itemId) {
         return "images/" + itemId;
