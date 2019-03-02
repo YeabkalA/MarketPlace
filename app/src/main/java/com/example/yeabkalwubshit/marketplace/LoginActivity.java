@@ -371,20 +371,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void openFeeds(String uid) {
-        mRef.child("items").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                HashMap<String, Object> data = (HashMap) dataSnapshot.getValue();
-                Feed.dataOrigin = data;
-                Intent intent = new Intent(LoginActivity.this, Feed.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        Intent intent = new Intent(LoginActivity.this, Feed.class);
+        startActivity(intent);
     }
 
 }

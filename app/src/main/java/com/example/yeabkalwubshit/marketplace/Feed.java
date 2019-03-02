@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SearchRecentSuggestionsProvider;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
@@ -27,12 +29,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,11 +49,14 @@ public class Feed extends AppCompatActivity {
     private ListView mFeedList;
     private FeedAdapter mAdapter;
 
-    public static HashMap<String, Object> dataOrigin;
+    private static HashMap<String, Object> dataOrigin;
     private ArrayList<Item> items;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+
+    private FirebaseStorage mStorage;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +71,12 @@ public class Feed extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
 
+        mStorage = FirebaseStorage.getInstance();
+        mStorageRef = mStorage.getReference();
+
         initUI();
-        fillItems();
+
+        refreshFeed();
 
 
     }
@@ -187,10 +201,36 @@ public class Feed extends AppCompatActivity {
             TextView title = convertView.findViewById(R.id.feedItemTitle);
             TextView desc = convertView.findViewById(R.id.feedItemDesc);
             TextView price = convertView.findViewById(R.id.feedItemPrice);
+            ImageView image = convertView.findViewById(R.id.feedItemImage);
 
             title.setText(item.getTitle());
             desc.setText(item.getDescription());
-            price.setText(Long.toString(item.getPriceInCents()));
+            long priceVal = item.getPriceInCents();
+            double priceDisp = priceVal/100.0;
+            price.setText("$"+Double.toString(priceDisp));
+
+
+            if(item.getImageURL() != null && !item.getImageURL().equals("")) {
+                StorageReference islandRef = mStorageRef.child(item.getImageURL());
+
+                final long TWO_MEGABYTE = 2 * 1024 * 1024;
+                Task<byte[]> taskImage = islandRef.getBytes(TWO_MEGABYTE);
+                try {
+                    while(!taskImage.isComplete()) {
+                        Thread.sleep(100);
+                    }
+                } catch (Exception e) {}
+
+                image.getLayoutParams().height = 300; // OR
+                image.getLayoutParams().width = 300;
+
+                byte[] bytes =  taskImage.getResult();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                image.setImageBitmap(bitmap);
+            } else {
+                image.setMaxHeight(0);
+                image.setMaxWidth(0);
+            }
 
             return convertView;
         }

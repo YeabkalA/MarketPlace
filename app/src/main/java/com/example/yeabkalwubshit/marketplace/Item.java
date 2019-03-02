@@ -185,6 +185,10 @@ public class Item {
         String desc = (String) map.get("description");
         Long price = (Long) map.get("priceInCents");
 
+        if(map.containsKey("imageURL")) {
+            setImageURL((String) map.get("imageURL"));
+        }
+
         setTitle(title);
         setDescription(desc);
         setPriceInCents(price);

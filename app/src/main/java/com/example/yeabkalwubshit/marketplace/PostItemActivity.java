@@ -108,13 +108,16 @@ public class PostItemActivity extends AppCompatActivity {
                                                 DateUtil dateUtil = new DateUtil();
                                                 String todayStr = dateUtil.today();
                                                 item.setPostedOn(todayStr);
+                                                String imageUrl = getImagePathString(Long.toString(nextId));
+                                                if(filePath != null) {
+                                                    item.setImageURL(imageUrl);
+                                                }
                                                 mDbRef.child("items").child(item.getId())
                                                         .setValue(item.createMap());
                                                 mDbRef.child("users").child(uid).child("items")
                                                         .child(Long.toString(nextId))
                                                         .setValue(todayStr);
-                                                uploadImage(PostItemActivity.this,
-                                                        Long.toString(nextId));
+                                                uploadImage(PostItemActivity.this, imageUrl);
                                             }
                                         }
                                     }
@@ -194,7 +197,7 @@ public class PostItemActivity extends AppCompatActivity {
                 PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(Activity act, String imageId) {
+    private void uploadImage(Activity act, String imageUrl) {
         if(filePath != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
@@ -202,7 +205,7 @@ public class PostItemActivity extends AppCompatActivity {
             dialog.show();
             dialog.setTitle("Creating your item...");
 
-            ref.child(getImagePathString(imageId)).putFile(filePath)
+            ref.child(imageUrl).putFile(filePath)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
