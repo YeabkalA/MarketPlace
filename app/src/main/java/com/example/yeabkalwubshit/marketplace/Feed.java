@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.provider.SearchRecentSuggestions;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +45,9 @@ public class Feed extends AppCompatActivity {
     public static HashMap<String, Object> dataOrigin;
     private ArrayList<Item> items;
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +58,11 @@ public class Feed extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         getWindow().setStatusBarColor(darkerColor);
 
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference();
+
         initUI();
         fillItems();
-
-        mAdapter = new FeedAdapter(this, items);
-        mFeedList.setAdapter(mAdapter);
 
 
     }
@@ -73,6 +82,24 @@ public class Feed extends AppCompatActivity {
             item.populateFromMap(itemData);
             items.add(item);
         }
+        mAdapter = new FeedAdapter(this, items);
+        mFeedList.setAdapter(mAdapter);
+    }
+
+    private void refreshFeed() {
+        mRef.child("items").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String, Object> data = (HashMap) dataSnapshot.getValue();
+                dataOrigin = data;
+                fillItems();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -122,6 +149,16 @@ public class Feed extends AppCompatActivity {
                         "Successfully signed out.",
                         Toast.LENGTH_LONG).show();
                 goToHomePage();
+                return true;
+            }
+        });
+
+        MenuItem refreshButton = menu.getItem(3);
+        refreshButton.setVisible(true);
+        refreshButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                refreshFeed();
                 return true;
             }
         });

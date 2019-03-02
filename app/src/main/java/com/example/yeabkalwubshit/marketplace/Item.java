@@ -1,7 +1,5 @@
 package com.example.yeabkalwubshit.marketplace;
 
-import android.text.TextUtils;
-
 import java.util.HashMap;
 
 public class Item {
