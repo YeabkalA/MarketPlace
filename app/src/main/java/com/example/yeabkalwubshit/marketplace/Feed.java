@@ -17,6 +17,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,11 +49,12 @@ import java.util.HashMap;
 
 public class Feed extends AppCompatActivity {
 
-    private ListView mFeedList;
-    private FeedAdapter mAdapter;
+    private RecyclerView mFeedList;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private static HashMap<String, Object> dataOrigin;
-    private ArrayList<ItemWithImage> items;
+    private ArrayList<Item> items;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -70,11 +72,19 @@ public class Feed extends AppCompatActivity {
 //        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
 //        getWindow().setStatusBarColor(darkerColor);
 
+        mFeedList = findViewById(R.id.feedItemsList);
+        mFeedList.setHasFixedSize(true);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        mFeedList.setLayoutManager(layoutManager);
+
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
 
         mStorage = FirebaseStorage.getInstance();
         mStorageRef = mStorage.getReference();
+
+        mFeedList.setAdapter(mAdapter);
 
         initUI();
 
@@ -98,11 +108,9 @@ public class Feed extends AppCompatActivity {
             Item item = new Item();
             item.populateFromMap(itemData);
 
-            ItemWithImage itemWithImage = new ItemWithImage();
-            itemWithImage.setItem(item);
-            items.add(itemWithImage);
+            items.add(item);
         }
-        mAdapter = new FeedAdapter(this, items);
+        mAdapter = new FeedListAdapter(items,this);
         mFeedList.setAdapter(mAdapter);
     }
 
@@ -186,8 +194,8 @@ public class Feed extends AppCompatActivity {
 
     }
 
-    public class FeedAdapter extends ArrayAdapter<ItemWithImage> {
-        public FeedAdapter(Context context, ArrayList<ItemWithImage> items) {
+    public class FeedAdapter extends ArrayAdapter<Item> {
+        public FeedAdapter(Context context, ArrayList<Item> items) {
             super(context, 0, items);
         }
 
@@ -195,8 +203,7 @@ public class Feed extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             // Get the data item for this position
-            ItemWithImage itemWithImage = getItem(position);
-            Item item = itemWithImage.getItem();
+            Item item = getItem(position);
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(
@@ -204,24 +211,17 @@ public class Feed extends AppCompatActivity {
             }
 
             TextView title = convertView.findViewById(R.id.feedItemTitle);
-            TextView desc = convertView.findViewById(R.id.feedItemDesc);
             TextView price = convertView.findViewById(R.id.feedItemPrice);
 
             ViewPager viewPager = convertView.findViewById(R.id.feedViewPager);
 
 
             title.setText(item.getTitle());
-            desc.setText(item.getDescription());
             long priceVal = item.getPriceInCents();
             String priceDisp = Item.getDollarRepresentation(priceVal);
             price.setText("$"+priceDisp);
 
-            String uid = FirebaseAuth.getInstance().getUid();
-            System.out.println("UID " + uid);
-            System.out.println(item.getOwnerId());
-
-            if(itemWithImage.getImage() == null
-                    && item.getImageURL() != null
+            if(item.getImageURL() != null
                     && !item.getImageURL().equals("")) {
                 StorageReference islandRef = mStorageRef.child(item.getImageURL());
                 Task<Uri> task = islandRef.getDownloadUrl();
@@ -231,36 +231,10 @@ public class Feed extends AppCompatActivity {
 
                 ArrayList<String> viewPagerList = new ArrayList<>();
                 viewPagerList.add(url);
-                viewPagerList.add(url);
+                viewPagerList.add("https://d3nfwcxd527z59.cloudfront.net/content/uploads/2019/03/21104030/Francis-Coquelin-Valencia.jpg");
 
                 ViewPagerAdapter adapter = new ViewPagerAdapter(getContext(), viewPagerList);
                 viewPager.setAdapter(adapter);
-
-
-
-
-//                final long SEVEN_MB = 7 * 1024 * 1024;
-//                System.out.println("Fetching image!!!!");
-//                Task<byte[]> taskImage = islandRef.getBytes(SEVEN_MB);
-//                try {
-//                    while(!taskImage.isComplete()) {
-//                        Thread.sleep(100);
-//                    }
-//                } catch (Exception e) {}
-//
-//                byte[] bytes =  taskImage.getResult();
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                itemWithImage.setImage(bitmap);
-            }
-
-            if(itemWithImage.getImage() != null) {
-                ImageView image = convertView.findViewById(R.id.feedItemImage);
-                image.setImageBitmap(itemWithImage.getImage());
-                image.getLayoutParams().height = 300; // OR
-                image.getLayoutParams().width = 300;
-            }
-            if(uid.equals(item.getOwnerId())) {
-                System.out.println("EQUALITY");
             }
 
             return convertView;

@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10px"
-    android:layout_margin="5px">
+    android:padding="10px">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -16,97 +15,154 @@
         android:layout_gravity="center"
         card_view:cardCornerRadius="8dp"
         android:layout_margin="5px"
-        card_view:cardBackgroundColor="@color/white">
+        card_view:cardBackgroundColor="@color/white"
+        >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10px"
             android:orientation="vertical">
-
 
             <TextView
                 android:id="@+id/feedItemTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:paddingLeft="10dp"
                 android:text="TextView"
-                android:textColor="@color/lightGreen"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textFontWeight="400"/>
+                android:textColor="@color/bluePrimDark"
+                android:textSize="18sp"
+                card_view:fontFamily="@font/roboto_black" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/poster_card_view"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5px"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/feedViewPager"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
 
                     <ImageView
-                        android:id="@+id/feedPosterImage"
+                        android:id="@+id/feedItemImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:color/darker_gray" />
-                </android.support.v7.widget.CardView>
+                        app:srcCompat="@android:drawable/alert_dark_frame" />
 
-                <TextView
-                    android:id="@+id/feedPosterName"
+                </android.support.v4.view.ViewPager>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="right"
-                    android:paddingRight="10dp"
-                    android:text="by yeaba"
-                    android:textColor="@color/lightGreen"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
+                        <TextView
+                            android:id="@+id/feedPriceLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_weight="1"
+
+                            android:text="Starting Price"
+                            android:textColor="@color/bluePrimDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/feedItemPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Winning Bid"
+                            android:textColor="@color/bluePrimDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/feedWinningBid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <RatingBar
+                            android:id="@+id/feedItemRating"
+                            style="@android:style/Widget.Material.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numStars="5"
+                            android:rating="3"
+                            android:stepSize="0.1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/feedNewUsed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="USED"
+                            android:textColor="@color/bluePrimLight" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/feedItemDistance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Distance: 1.0mi"
+                            android:textColor="@android:color/black"
+                            tools:text="Distance: 1.0mi" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/feedItemDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:paddingLeft="10dp"
-                android:text="TextView"
-                android:textColor="@android:color/black" />
-
-            <ImageView
-                android:id="@+id/feedItemImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:color/darker_gray" />
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/feedViewPager"
-                android:layout_width="200dp"
-                android:layout_height="200dp" />
-
-            <TextView
-                android:id="@+id/feedItemPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="TextView"
-                android:textColor="@color/lightGreen"
-                android:textSize="16dp"
-                android:textStyle="bold" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

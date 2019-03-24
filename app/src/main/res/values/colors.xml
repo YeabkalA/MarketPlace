@@ -11,4 +11,10 @@
     <color name="lightGreen">#7cb342</color>
     <color name="darkGreen">#43a047</color>
     <color name="white">#ffffff</color>
+
+    <color name="bluePrimLight">#4f83cc</color>
+    <color name="bluePrimDark">#002f6c</color>
+    <color name="blueSecLight">#6ab7ff</color>
+    <color name="blueSecDark">#005cb2</color>
+
 </resources>
