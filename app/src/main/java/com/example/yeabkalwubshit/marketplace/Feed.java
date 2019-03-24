@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,7 +52,7 @@ public class Feed extends AppCompatActivity {
     private FeedAdapter mAdapter;
 
     private static HashMap<String, Object> dataOrigin;
-    private ArrayList<Item> items;
+    private ArrayList<ItemWithImage> items;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -62,11 +64,11 @@ public class Feed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        ActionBar actionBar = getSupportActionBar();
-        int actionBarColor = Color.rgb(40,60,250);
-        int darkerColor = Color.rgb(10,30,200);
-        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
-        getWindow().setStatusBarColor(darkerColor);
+//        ActionBar actionBar = getSupportActionBar();
+//        int actionBarColor = Color.rgb(40,60,250);
+//        int darkerColor = Color.rgb(10,30,200);
+//        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
+//        getWindow().setStatusBarColor(darkerColor);
 
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
@@ -92,9 +94,13 @@ public class Feed extends AppCompatActivity {
             if(key.equals("next_item_id")) continue;
             HashMap<String, Object> itemData = (HashMap) dataOrigin.get(key);
             System.out.println(itemData);
+
             Item item = new Item();
             item.populateFromMap(itemData);
-            items.add(item);
+
+            ItemWithImage itemWithImage = new ItemWithImage();
+            itemWithImage.setItem(item);
+            items.add(itemWithImage);
         }
         mAdapter = new FeedAdapter(this, items);
         mFeedList.setAdapter(mAdapter);
@@ -180,8 +186,8 @@ public class Feed extends AppCompatActivity {
 
     }
 
-    public class FeedAdapter extends ArrayAdapter<Item> {
-        public FeedAdapter(Context context, ArrayList<Item> items) {
+    public class FeedAdapter extends ArrayAdapter<ItemWithImage> {
+        public FeedAdapter(Context context, ArrayList<ItemWithImage> items) {
             super(context, 0, items);
         }
 
@@ -189,19 +195,20 @@ public class Feed extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             // Get the data item for this position
-            Item item = getItem(position);
+            ItemWithImage itemWithImage = getItem(position);
+            Item item = itemWithImage.getItem();
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(
                         R.layout.feed_entry_cell, parent, false);
             }
 
-            System.out.println("In adapter = " + item.createMap());
-
             TextView title = convertView.findViewById(R.id.feedItemTitle);
             TextView desc = convertView.findViewById(R.id.feedItemDesc);
             TextView price = convertView.findViewById(R.id.feedItemPrice);
-            ImageView image = convertView.findViewById(R.id.feedItemImage);
+
+            ViewPager viewPager = convertView.findViewById(R.id.feedViewPager);
+
 
             title.setText(item.getTitle());
             desc.setText(item.getDescription());
@@ -209,27 +216,51 @@ public class Feed extends AppCompatActivity {
             String priceDisp = Item.getDollarRepresentation(priceVal);
             price.setText("$"+priceDisp);
 
+            String uid = FirebaseAuth.getInstance().getUid();
+            System.out.println("UID " + uid);
+            System.out.println(item.getOwnerId());
 
-            if(item.getImageURL() != null && !item.getImageURL().equals("")) {
+            if(itemWithImage.getImage() == null
+                    && item.getImageURL() != null
+                    && !item.getImageURL().equals("")) {
                 StorageReference islandRef = mStorageRef.child(item.getImageURL());
+                Task<Uri> task = islandRef.getDownloadUrl();
+                while(!task.isComplete()) {}
 
-                final long TWO_MEGABYTE = 2 * 1024 * 1024;
-                Task<byte[]> taskImage = islandRef.getBytes(TWO_MEGABYTE);
-                try {
-                    while(!taskImage.isComplete()) {
-                        Thread.sleep(100);
-                    }
-                } catch (Exception e) {}
+                String url = task.getResult().toString();
 
+                ArrayList<String> viewPagerList = new ArrayList<>();
+                viewPagerList.add(url);
+                viewPagerList.add(url);
+
+                ViewPagerAdapter adapter = new ViewPagerAdapter(getContext(), viewPagerList);
+                viewPager.setAdapter(adapter);
+
+
+
+
+//                final long SEVEN_MB = 7 * 1024 * 1024;
+//                System.out.println("Fetching image!!!!");
+//                Task<byte[]> taskImage = islandRef.getBytes(SEVEN_MB);
+//                try {
+//                    while(!taskImage.isComplete()) {
+//                        Thread.sleep(100);
+//                    }
+//                } catch (Exception e) {}
+//
+//                byte[] bytes =  taskImage.getResult();
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                itemWithImage.setImage(bitmap);
+            }
+
+            if(itemWithImage.getImage() != null) {
+                ImageView image = convertView.findViewById(R.id.feedItemImage);
+                image.setImageBitmap(itemWithImage.getImage());
                 image.getLayoutParams().height = 300; // OR
                 image.getLayoutParams().width = 300;
-
-                byte[] bytes =  taskImage.getResult();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                image.setImageBitmap(bitmap);
-            } else {
-                image.setMaxHeight(0);
-                image.setMaxWidth(0);
+            }
+            if(uid.equals(item.getOwnerId())) {
+                System.out.println("EQUALITY");
             }
 
             return convertView;

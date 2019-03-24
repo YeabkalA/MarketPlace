@@ -184,6 +184,7 @@ public class Item {
         String title = (String) map.get("title");
         String desc = (String) map.get("description");
         Long price = (Long) map.get("priceInCents");
+        String ownerId = (String) map.get("owner_id");
 
         if(map.containsKey("imageURL")) {
             setImageURL((String) map.get("imageURL"));
@@ -192,6 +193,7 @@ public class Item {
         setTitle(title);
         setDescription(desc);
         setPriceInCents(price);
+        setOwnerId(ownerId);
 
         return true;
     }

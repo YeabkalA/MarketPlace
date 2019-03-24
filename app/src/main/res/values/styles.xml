@@ -1,11 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:colorButtonNormal">@color/blue</item>
+        <item name="android:editTextColor">#000000</item>
+        <item name="android:buttonCornerRadius">4pt</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColorHint">@color/blue</item>
+        <item name="android:fontFamily">@font/kalam</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
