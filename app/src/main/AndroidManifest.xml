@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <provider
             android:name=".SampleRecentSuggestionProvider"
-            android:authorities="com.example.yeabkalwubshit.marketplace.SampleRecentSuggestionProvider"></provider>
+            android:authorities="com.example.yeabkalwubshit.marketplace.SampleRecentSuggestionProvider" />
 
         <activity
             android:name=".LoginActivity"
@@ -29,7 +29,10 @@
         </activity>
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".Feed" />
-        <activity android:name=".PostItemActivity"></activity>
+        <activity android:name=".PostItemActivity" />
+        <activity
+            android:name=".ItemDetailView"
+            android:label="@string/title_activity_item_detail_view"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background">
+    >
 
 
     <LinearLayout
@@ -20,8 +20,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name_and_contact_info"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/signUpUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Preferred User Name"
+                android:inputType="textCapSentences|textPersonName"
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +54,7 @@
                 android:hint="@string/prompt_email"
                 android:inputType="textPersonName"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textStyle="italic" />
 
         </LinearLayout>
@@ -56,8 +73,8 @@
                 android:ems="10"
                 android:hint="@string/prompt_first_name"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/white"
-                android:textStyle="italic"/>
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +90,8 @@
                 android:ems="10"
                 android:hint="@string/prompt_last_name"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/white"
-                android:textStyle="italic"/>
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,8 +107,8 @@
                 android:ems="10"
                 android:hint="@string/prompt_phone_number"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/white"
-                android:textStyle="italic"/>
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/image"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -136,9 +153,8 @@
                 android:layout_height="20dp"
                 android:text="@string/address"
                 android:textAlignment="gravity"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                />
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -153,8 +169,8 @@
                     android:ems="10"
                     android:hint="@string/address_street1"
                     android:inputType="textPersonName"
-                    android:textColor="@android:color/white"
-                    android:textStyle="italic"/>
+                    android:textColor="@android:color/black"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -172,8 +188,8 @@
                     android:ems="10"
                     android:hint="@string/address_street2"
                     android:inputType="textPersonName"
-                    android:textColor="@android:color/white"
-                    android:textStyle="italic"/>
+                    android:textColor="@android:color/black"
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
@@ -189,8 +205,8 @@
                     android:ems="10"
                     android:hint="@string/address_city"
                     android:inputType="textPersonName"
-                    android:textColor="@android:color/white"
-                    android:textStyle="italic"/>
+                    android:textColor="@android:color/black"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -208,8 +224,8 @@
                     android:ems="10"
                     android:hint="@string/address_zip_code"
                     android:inputType="textPersonName"
-                    android:textColor="@android:color/white"
-                    android:textStyle="italic"/>
+                    android:textColor="@android:color/black"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -242,8 +258,8 @@
                 android:ems="10"
                 android:hint="@string/require_password_creation"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
-                android:textStyle="italic"/>
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -259,8 +275,8 @@
                 android:ems="10"
                 android:hint="@string/require_password_creation_again"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
-                android:textStyle="italic"/>
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <Button

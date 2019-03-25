@@ -108,10 +108,16 @@ public class Address {
     }
 
     public static boolean isValidZipCode(String text) {
+        String rep = text;
+        rep = rep.replaceAll("[^0-9]", "");
+
+        if(!rep.equals(text)) { return false; }
+
         boolean lenCheck = text.length() == 5;
         if(!lenCheck) {
             return false;
         }
+
         int numeric = Integer.parseInt(text);
         // Check if input is in the range of valid zip code values.
         if(numeric < LEAST_ZIPCODE || numeric > BIGGEST_ZIPCODE) {

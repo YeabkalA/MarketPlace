@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10px">
+    android:padding="5dp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         card_view:cardCornerRadius="8dp"
-        android:layout_margin="5px"
+        android:layout_margin="1px"
+        android:padding="5px"
         card_view:cardBackgroundColor="@color/white"
         >
 
@@ -29,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/bluePrimDark"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 card_view:fontFamily="@font/roboto_black" />
 
@@ -40,8 +41,8 @@
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/feedViewPager"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:layout_width="150dp"
+                    android:layout_height="150dp">
 
                     <ImageView
                         android:id="@+id/feedItemImage"
@@ -60,8 +61,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Posted By:"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="chineke" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <TextView
                             android:id="@+id/feedPriceLabel"
@@ -71,13 +96,14 @@
                             android:layout_weight="1"
 
                             android:text="Starting Price"
-                            android:textColor="@color/bluePrimDark"
+                            android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/feedItemPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="right"
                             android:text="TextView"
                             android:textColor="@android:color/holo_red_dark"
                             android:textStyle="bold" />
@@ -87,15 +113,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Winning Bid"
-                            android:textColor="@color/bluePrimDark"
+                            android:layout_gravity="left"
+                            android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
                         <TextView
@@ -103,6 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="right"
                             android:text="TextView"
                             android:textColor="@android:color/holo_green_dark"
                             android:textStyle="bold" />
@@ -112,8 +140,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <RatingBar
                             android:id="@+id/feedItemRating"
@@ -132,8 +160,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <TextView
                             android:id="@+id/feedNewUsed"
@@ -141,15 +169,22 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="USED"
-                            android:textColor="@color/bluePrimLight" />
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/feedItemCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Book" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <TextView
                             android:id="@+id/feedItemDistance"
@@ -159,6 +194,7 @@
                             android:text="Distance: 1.0mi"
                             android:textColor="@android:color/black"
                             tools:text="Distance: 1.0mi" />
+
                     </LinearLayout>
 
                 </LinearLayout>

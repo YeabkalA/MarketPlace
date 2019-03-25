@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +38,7 @@ import java.util.HashMap;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
+    private EditText mUserName;
     private EditText mEmail;
     private EditText mFirstName;
     private EditText mLastName;
@@ -72,13 +74,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-
-        ActionBar actionBar = getSupportActionBar();
-        int actionBarColor = Color.rgb(40,60,250);
-        int darkerColor = Color.rgb(10,30,200);
-        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         setTitle("Create Account");
-        getWindow().setStatusBarColor(darkerColor);
+
 
         dateUtil = new DateUtil();
 
@@ -86,6 +83,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         ref = firebaseStorage.getReference();
 
 
+        mUserName = findViewById(R.id.signUpUserName);
         mEmail = findViewById(R.id.signUpEmail);
         mFirstName = findViewById(R.id.signUpFirstName);
         mLastName = findViewById(R.id.signUpLastName);
@@ -131,9 +129,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                     return;
                 }
                 final User user = createUser();
-                String todayStr = dateUtil.today();
-                user.setCreatedOn(todayStr);
                 if(user != null && user.isValid()) {
+                    String todayStr = dateUtil.today();
+                    user.setCreatedOn(todayStr);
                     System.out.println(user.createMap());
                     // TODO(yeabkal) try auth new user.
                     String password1 = mNewPassword.getText().toString();
@@ -141,28 +139,32 @@ public class CreateAccountActivity extends AppCompatActivity {
                     if(PasswordUtil.validatePassword(password1, password2)) {
                         mAuth = FirebaseAuth.getInstance();
                         mAuth.createUserWithEmailAndPassword(user.getEmail(), password1)
-                                .addOnCompleteListener(
-                                new OnCompleteListener<AuthResult>() {
+                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if(task.isSuccessful()) {
-                                            FirebaseUser currentUser = task.getResult().getUser();
-                                            myRef.child("users").child(currentUser.getUid())
-                                                    .setValue(user.createMap());
-                                            uploadImage(CreateAccountActivity.this, currentUser.getUid());
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Successfully created account for "
-                                                            + user.getEmail(),
-                                                    Toast.LENGTH_LONG).show();
-                                            goToHomepage();
-                                        } else {
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-                                        }
+                                    public void onSuccess(AuthResult authResult) {
+
+                                        FirebaseUser currentUser = authResult.getUser();
+                                        myRef.child("users").child(currentUser.getUid())
+                                                .setValue(user.createMap());
+                                        uploadImage(CreateAccountActivity.this, currentUser.getUid());
+                                        Toast.makeText(getApplicationContext(),
+                                                "Successfully created account for "
+                                                        + user.getEmail(),
+                                                Toast.LENGTH_LONG).show();
+                                        goToHomepage();
                                     }
-                                }
-                        );
+
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),
+                                        e.getMessage(),
+                                        Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+                    } else {
+                        mNewPassword.setError("Passwords must match.");
                     }
                 }
             }
@@ -172,6 +174,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     boolean checkInputs() {
         boolean validInputs = true;
 
+        String userName = mUserName.getText().toString();
         String firstName = mFirstName.getText().toString();
         String lastName = mLastName.getText().toString();
         String email = mEmail.getText().toString();
@@ -186,6 +189,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password1 = mNewPassword.getText().toString();
         String password2 = mNewPasswordAgain.getText().toString();
 
+        if(TextUtils.isEmpty(userName)) {
+            mUserName.setError("User name is a required field.");
+            validInputs = false;
+        }
         if(TextUtils.isEmpty(firstName)) {
             mFirstName.setError("First name is a required field.");
             validInputs = false;
@@ -232,7 +239,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             validInputs = false;
         }
 
-        if(TextUtils.isEmpty(zip)) {
+        if(TextUtils.isEmpty(zip) || !Address.isValidZipCode(zip)) {
             mZip.setError("Zip code is a required field.");
             validInputs = false;
         }
@@ -258,12 +265,14 @@ public class CreateAccountActivity extends AppCompatActivity {
             return null;
         }
 
+        String userName = mUserName.getText().toString();
         String firstName = mFirstName.getText().toString();
         String lastName = mLastName.getText().toString();
         String email = mEmail.getText().toString();
         String phoneNumber = mPhoneNumber.getText().toString();
 
         User user = new User.Builder()
+                .setUserName(userName)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setAddress(address)

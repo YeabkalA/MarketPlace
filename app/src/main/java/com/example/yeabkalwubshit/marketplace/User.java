@@ -3,11 +3,21 @@ package com.example.yeabkalwubshit.marketplace;
 import java.util.HashMap;
 
 public class User {
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    private String userName;
     private String firstName;
     private String lastName;
     private Address address;
     private String email;
     private String phoneNumber;
+    private Rating rating;
 
     private String imageUrl;
 
@@ -17,6 +27,11 @@ public class User {
         private User user;
 
         public Builder() { this.user = new User(); }
+
+        public Builder setUserName(String userName) {
+            this.user.setUserName(userName);
+            return this;
+        }
 
         public Builder setFirstName(String firstName) {
             this.user.setFirstName(firstName);
@@ -45,6 +60,7 @@ public class User {
         }
 
         public User build() {
+            this.user.rating = new Rating();
             return this.user;
         }
 
@@ -55,6 +71,8 @@ public class User {
                 && EmailUtil.validateEmail(this.email)
                 && PhoneNumberUtil.validPhoneNumber(this.phoneNumber);
     }
+
+    public void setUserName(String userName) { this.userName = userName; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -79,6 +97,10 @@ public class User {
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
     public void setCreatedOn(String createdOn) { this.createdOn = createdOn; }
+
+    public String getUserName() {
+        return userName;
+    }
 
     public String getFirstName() {
 
@@ -114,9 +136,9 @@ public class User {
         ret.put("email", email);
         ret.put("address", address.createMap());
         ret.put("createdOn", createdOn);
-        if(imageUrl != null && imageUrl.length() != 0) {
-            ret.put("imageUrl", imageUrl);
-        }
+        ret.put("rating", rating.createMap());
+        ret.put("imageUrl", imageUrl);
+        ret.put("userName", userName);
         return ret;
     }
 }

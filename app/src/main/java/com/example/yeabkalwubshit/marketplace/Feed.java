@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -61,6 +62,7 @@ public class Feed extends AppCompatActivity {
 
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
+    private android.support.v7.widget.AppCompatButton mGetDetailsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +130,7 @@ public class Feed extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override

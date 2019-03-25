@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -35,7 +37,6 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         public RatingBar rating;
         public TextView distance;
         public ViewPager viewPager;
-        public ImageView image;
 
         public View layout;
 
@@ -52,7 +53,6 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
             distance = v.findViewById(R.id.feedItemDistance);
             rating = v.findViewById(R.id.feedItemRating);
             viewPager = v.findViewById(R.id.feedViewPager);
-            image = v.findViewById(R.id.feedItemImage);
 
             mStorage = FirebaseStorage.getInstance();
             mStorageRef = mStorage.getReference();
@@ -109,9 +109,18 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         }
 
         holder.distance.setText(Double.toString(distance));
-        holder.winningBid.setText("1.0");
-        holder.newUsed.setText("used");
-        holder.rating.setRating(1.0f);
+        holder.winningBid.setText("1230.0");
+        holder.newUsed.setText(item.getCondition());
+        holder.rating.setRating(position%5 + 1);
+
+        holder.itemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ItemDetailView.class);
+                ItemDetailView.item = item;
+                context.startActivity(intent);
+            }
+        });
 
         if(item.getImageURL() != null
                 && !item.getImageURL().equals("")) {

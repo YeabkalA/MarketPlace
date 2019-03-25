@@ -37,6 +37,5 @@ public class Rating {
         rating.populateFromMap(map);
         rating.update(newRating);
         return rating;
-
     }
 }

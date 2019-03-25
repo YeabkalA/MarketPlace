@@ -184,7 +184,9 @@ public class Item {
         String title = (String) map.get("title");
         String desc = (String) map.get("description");
         Long price = (Long) map.get("priceInCents");
+        String condition = (String) map.get("condition");
         String ownerId = (String) map.get("owner_id");
+        String postedOn = (String) map.get("postedOn");
         String ownerZip = "";
         if(map.containsKey("owner_zip")) {
             ownerZip = (String) map.get("owner_zip");
@@ -199,7 +201,8 @@ public class Item {
         setPriceInCents(price);
         setOwnerId(ownerId);
         setOwnerZip(ownerZip);
-
+        setCondition(condition);
+        setPostedOn(postedOn);
         return true;
     }
 
