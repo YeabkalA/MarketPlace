@@ -14,6 +14,8 @@ public class Item {
     private String ownerZip;
     private String postedOn;
 
+    private String category;
+
     // Builder for item.
     static class Builder {
         private Item item;
@@ -57,6 +59,11 @@ public class Item {
 
         public Builder setPostedOn(String postedOnDate) {
             this.item.postedOn = postedOnDate;
+            return this;
+        }
+
+        public Builder setCategory(String category) {
+            this.item.category = category;
             return this;
         }
 
@@ -140,6 +147,14 @@ public class Item {
         this.postedOn = postedOn;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public static String getDollarRepresentation(Long cents) {
         return Double.toString(cents/(100.0));
     }
@@ -177,10 +192,14 @@ public class Item {
         if(postedOn != null) {
             ret.put("postedOn", postedOn);
         }
+
+        ret.put("category", category);
+
         return ret;
     }
 
     public boolean populateFromMap(HashMap<String, Object> map) {
+        String id = (String) map.get("id");
         String title = (String) map.get("title");
         String desc = (String) map.get("description");
         Long price = (Long) map.get("priceInCents");
@@ -196,11 +215,15 @@ public class Item {
             setImageURL((String) map.get("imageURL"));
         }
 
+        if(map.containsKey("category")) {
+            setCategory((String) map.get("category"));
+        }
+
+        setId(id);
         setTitle(title);
         setDescription(desc);
         setPriceInCents(price);
         setOwnerId(ownerId);
-        setOwnerZip(ownerZip);
         setCondition(condition);
         setPostedOn(postedOn);
         return true;

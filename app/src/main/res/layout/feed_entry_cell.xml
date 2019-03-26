@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         card_view:cardCornerRadius="8dp"
         android:layout_margin="1px"
+        android:elevation="10dp"
         android:padding="5px"
         card_view:cardBackgroundColor="@color/white"
         >
@@ -32,7 +33,9 @@
                 android:text="TextView"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                card_view:fontFamily="@font/roboto_black" />
+                android:textStyle="bold"
+                android:layout_margin="5px"
+                card_view:fontFamily="@font/roboto_regular" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +61,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingLeft="5dp"
@@ -67,6 +70,7 @@
                         <TextView
                             android:id="@+id/textView23"
                             android:layout_width="wrap_content"
+                            android:layout_marginHorizontal="5dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Posted By:"
@@ -82,7 +86,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingLeft="5dp"
@@ -90,6 +94,7 @@
 
                         <TextView
                             android:id="@+id/feedPriceLabel"
+                            android:layout_marginHorizontal="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
@@ -110,7 +115,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingLeft="5dp"
@@ -122,6 +127,7 @@
                             android:layout_weight="1"
                             android:text="Winning Bid"
                             android:layout_gravity="left"
+                            android:layout_marginHorizontal="5dp"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
@@ -156,7 +162,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
@@ -168,6 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginHorizontal="5dp"
                             android:text="USED"
                             android:textColor="@android:color/black" />
 

@@ -16,11 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,8 @@ public class PostItemActivity extends AppCompatActivity {
     private Uri filePath;
     private TextView mImageDesc;
 
+    private Spinner mCategory;
+
     private final int PICK_IMAGE_REQUEST = 71;
 
     FirebaseStorage firebaseStorage;
@@ -75,6 +79,13 @@ public class PostItemActivity extends AppCompatActivity {
         ref = firebaseStorage.getReference();
 
         initUI();
+
+        // Set up the state selection spinner.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.categories,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mCategory.setAdapter(adapter);
 
         mUploadImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,12 +161,14 @@ public class PostItemActivity extends AppCompatActivity {
         mUploadImageBtn = findViewById(R.id.uploadImageBtn);
         mImage = findViewById(R.id.img);
         mImageDesc = findViewById(R.id.imageDesc);
+        mCategory = findViewById(R.id.itemCategory);
     }
 
     Item setItem(Long id) {
         String title = mTitle.getText().toString();
         String description = mDescription.getText().toString();
         String priceInCentsStr = mPrice.getText().toString();
+        String category = mCategory.getSelectedItem().toString();
 
         if(TextUtils.isEmpty(title)) {
             mTitle.setError("Title is a required field");
@@ -169,6 +182,13 @@ public class PostItemActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(priceInCentsStr)) {
             mPrice.setError("Price is a required field");
+            return null;
+        }
+
+        if(TextUtils.isEmpty(category)) {
+            Toast.makeText(getApplicationContext(),
+                    "Select at least one category for your new item.",
+                    Toast.LENGTH_LONG).show();
             return null;
         }
 
@@ -189,6 +209,7 @@ public class PostItemActivity extends AppCompatActivity {
                 .setPriceInCents((long) priceInCents)
                 .setId(Long.toString(id))
                 .setCondition(condition)
+                .setCategory(category)
                 .build();
 
         return item;

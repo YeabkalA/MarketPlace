@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
@@ -31,10 +30,10 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Cities"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:title="Cities" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -47,7 +46,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
@@ -60,9 +59,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/white"
-                    >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -73,8 +71,10 @@
                             android:id="@+id/itemDetailPoster"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="TextView" />
+
                         <RatingBar
                             android:id="@+id/itemDetailPosterRating"
                             style="@android:style/Widget.Material.RatingBar.Small"
@@ -96,6 +96,7 @@
                             android:id="@+id/imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:src="@drawable/ic_love" />
 
@@ -108,7 +109,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
@@ -116,6 +117,7 @@
                             android:id="@+id/itemDetailNewUsed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="TextView" />
 
@@ -142,9 +144,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/white"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/itemDetailDescriptionLabel"
@@ -160,8 +161,8 @@
                         android:id="@+id/itemDetailDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:layout_margin="10px"
+                        android:background="@color/white"
                         android:text="TextView" />
                 </LinearLayout>
 
@@ -177,9 +178,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/white"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/itemDetailBidStatusLabel"
@@ -200,18 +200,18 @@
                             android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="Price:"
-                            android:layout_marginHorizontal="10px"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/itemDetailPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="TextView"
-                            android:layout_marginHorizontal="10px"
                             android:textColor="@android:color/holo_red_dark"
                             android:textStyle="bold" />
 
@@ -227,18 +227,18 @@
                             android:id="@+id/textView10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="Winning Bid:"
-                            android:layout_marginHorizontal="10px"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/itemDetailWinningBid"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="TextView"
-                            android:layout_marginHorizontal="10px"
                             android:textColor="@android:color/holo_green_dark"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -252,18 +252,18 @@
                             android:id="@+id/textView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="Number of Bids:"
-                            android:layout_marginHorizontal="10px"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/itemDetailNumOfBids"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10px"
                             android:layout_weight="1"
                             android:text="TextView"
-                            android:layout_marginHorizontal="10px"
                             android:textColor="@color/colorPrimaryDark"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -271,6 +271,16 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/biddingButton"
+                android:text="BID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_margin="16dp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
