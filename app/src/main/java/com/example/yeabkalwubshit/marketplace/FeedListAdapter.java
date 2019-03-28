@@ -37,6 +37,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         public RatingBar rating;
         public TextView distance;
         public ViewPager viewPager;
+        public TextView category;
 
         public View layout;
 
@@ -53,6 +54,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
             distance = v.findViewById(R.id.feedItemDistance);
             rating = v.findViewById(R.id.feedItemRating);
             viewPager = v.findViewById(R.id.feedViewPager);
+            category = v.findViewById(R.id.feedItemCategory);
 
             mStorage = FirebaseStorage.getInstance();
             mStorageRef = mStorage.getReference();
@@ -109,9 +111,18 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         }
 
         holder.distance.setText(Double.toString(distance));
-        holder.winningBid.setText("1230.0");
+
+        if(item.getBids().size()>0) {
+            Bid winningBid = item.calculateWinningBid();
+            holder.winningBid.setText(Item.getDollarRepresentation(winningBid.getValueInCents()));
+        } else {
+            holder.winningBid.setText("NA");
+        }
+
         holder.newUsed.setText(item.getCondition());
         holder.rating.setRating(position%5 + 1);
+        holder.category.setText(item.getCategory() == null ? "NO CATEG " : item.getCategory());
+
 
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override

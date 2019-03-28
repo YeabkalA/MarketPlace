@@ -1,6 +1,8 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Item {
 
@@ -13,6 +15,34 @@ public class Item {
     private Long priceInCents;
     private String ownerZip;
     private String postedOn;
+    private Bid winningBid;
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    public Bid getWinningBid() {
+        return winningBid;
+    }
+
+    public Bid calculateWinningBid() {
+        if(bids.size() == 0) return null;
+        long maxVal = Long.MIN_VALUE;
+        for(Bid bid: bids) {
+            if(bid.getValueInCents() > maxVal) {
+                maxVal = bid.getValueInCents();
+                winningBid = bid;
+            }
+        }
+        return winningBid;
+    }
+
+
+    private List<Bid> bids;
 
     private String category;
 
@@ -73,7 +103,9 @@ public class Item {
 
     }
 
-    public Item() {}
+    public Item() {
+        bids = new ArrayList<>();
+    }
 
     public String getId() {
         return id;
@@ -199,6 +231,7 @@ public class Item {
     }
 
     public boolean populateFromMap(HashMap<String, Object> map) {
+        System.out.println("The map \n" + map);
         String id = (String) map.get("id");
         String title = (String) map.get("title");
         String desc = (String) map.get("description");
@@ -206,26 +239,30 @@ public class Item {
         String condition = (String) map.get("condition");
         String ownerId = (String) map.get("owner_id");
         String postedOn = (String) map.get("postedOn");
-        String ownerZip = "";
-        if(map.containsKey("owner_zip")) {
-            ownerZip = (String) map.get("owner_zip");
-        }
+        String ownerZip = (String) map.get("owner_zip");
+        String imageURL = (String) map.get("imageURL");
+        String category = (String) map.get("category");
 
-        if(map.containsKey("imageURL")) {
-            setImageURL((String) map.get("imageURL"));
-        }
-
-        if(map.containsKey("category")) {
-            setCategory((String) map.get("category"));
+        if(map.containsKey("bids")) {
+            System.out.println("BIDS" + map.get("bids").toString());
+            HashMap<String, Object> bids = (HashMap) map.get("bids");
+            for(String bidId: bids.keySet()) {
+                Bid bid = Bid.bidFromMap((HashMap) bids.get(bidId));
+                this.bids.add(bid);
+            }
         }
 
         setId(id);
         setTitle(title);
         setDescription(desc);
         setPriceInCents(price);
-        setOwnerId(ownerId);
         setCondition(condition);
+        setOwnerId(ownerId);
         setPostedOn(postedOn);
+        setOwnerZip(ownerZip);
+        setImageURL(imageURL);
+        setCategory(category);
+
         return true;
     }
 

@@ -92,10 +92,15 @@ public class ItemDetailView extends Activity {
         mNewUsed.setText(item.getCondition());
         mCategory.setText(item.getCategory() == null ? "Category" : item.getCategory());
         mRatingBar.setRating(3.0f);
-        mPostDate.setText(item.getPostedOn());
+        mPostDate.setText("posted on " + item.getPostedOn());
         mPrice.setText(Item.getDollarRepresentation(item.getPriceInCents()));
-        mNumOfBids.setText("5");
-        mWinningBid.setText(Item.getDollarRepresentation(item.getPriceInCents() + 10));
+        if(item.getWinningBid() != null) {
+            mWinningBid.setText(Item.getDollarRepresentation(item.getWinningBid().getValueInCents()));
+        } else {
+            mWinningBid.setText("NA");
+        }
+        mNumOfBids.setText(Integer.toString(item.getBids().size()));
+
 
         ArrayList<String> viewPagerList = new ArrayList<>();
 

@@ -197,53 +197,6 @@ public class Feed extends AppCompatActivity {
 
     }
 
-    public class FeedAdapter extends ArrayAdapter<Item> {
-        public FeedAdapter(Context context, ArrayList<Item> items) {
-            super(context, 0, items);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            // Get the data item for this position
-            Item item = getItem(position);
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(
-                        R.layout.feed_entry_cell, parent, false);
-            }
-
-            TextView title = convertView.findViewById(R.id.feedItemTitle);
-            TextView price = convertView.findViewById(R.id.feedItemPrice);
-
-            ViewPager viewPager = convertView.findViewById(R.id.feedViewPager);
-
-
-            title.setText(item.getTitle());
-            long priceVal = item.getPriceInCents();
-            String priceDisp = Item.getDollarRepresentation(priceVal);
-            price.setText("$"+priceDisp);
-
-            if(item.getImageURL() != null
-                    && !item.getImageURL().equals("")) {
-                StorageReference islandRef = mStorageRef.child(item.getImageURL());
-                Task<Uri> task = islandRef.getDownloadUrl();
-                while(!task.isComplete()) {}
-
-                String url = task.getResult().toString();
-
-                ArrayList<String> viewPagerList = new ArrayList<>();
-                viewPagerList.add(url);
-                viewPagerList.add("https://d3nfwcxd527z59.cloudfront.net/content/uploads/2019/03/21104030/Francis-Coquelin-Valencia.jpg");
-
-                ViewPagerAdapter adapter = new ViewPagerAdapter(getContext(), viewPagerList);
-                viewPager.setAdapter(adapter);
-            }
-
-            return convertView;
-        }
-    }
-
     void openPostItem() {
         Intent intent = new Intent(Feed.this, PostItemActivity.class);
         startActivity(intent);
