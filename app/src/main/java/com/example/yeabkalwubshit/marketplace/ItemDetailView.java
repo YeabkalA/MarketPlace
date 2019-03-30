@@ -139,13 +139,15 @@ public class ItemDetailView extends Activity {
                     return;
                 }
 
+                NetworkServiceHandler networkServiceHandler = NetworkServiceHandler.getInstance();
+
                 Bid bid = new Bid.Builder()
                         .setItemId(item.getId())
-                        .setIssuerId(NetworkServiceHandler.getCurrentUsersId())
+                        .setIssuerId(networkServiceHandler.getCurrentUsersId())
                         .setOwnerId(item.getOwnerId())
                         .setValueInCents((long) value * 100)
                         .build();
-                NetworkServiceHandler.bidForItem(item.getId(), bid);
+                networkServiceHandler.bidForItem(item.getId(), bid);
             }
         });
         AlertDialog dialog = alertBuilder.show();

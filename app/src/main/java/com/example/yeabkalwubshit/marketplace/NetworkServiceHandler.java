@@ -11,24 +11,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
-import java.util.HashMap;
-
 public class NetworkServiceHandler {
-    private static FirebaseAuth auth;
-    private static FirebaseStorage storage;
-    private static FirebaseDatabase database;
 
-    private static void checkInit() {
-        if(auth == null || storage == null || database == null) {
-            auth = FirebaseAuth.getInstance();
-            storage = FirebaseStorage.getInstance();
-            database = FirebaseDatabase.getInstance();
+    private static NetworkServiceHandler instance;
+
+    private NetworkServiceHandler() {}
+
+    public static NetworkServiceHandler getInstance() {
+        // Lazy instantiation.
+        if(instance == null) {
+            instance = new NetworkServiceHandler();
+            instance.auth = FirebaseAuth.getInstance();
+            instance.database = FirebaseDatabase.getInstance();
         }
+        return instance;
     }
 
-    public static void bidForItem(final String itemId, final Bid bid) {
-        checkInit();
-        final DatabaseReference dbRef = database.getReference();
+    private static FirebaseAuth auth;
+    private static FirebaseDatabase database;
+
+
+    public void bidForItem(final String itemId, final Bid bid) {
+        final DatabaseReference dbRef = instance.database.getReference();
         dbRef.child("next_bid_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -39,7 +43,6 @@ public class NetworkServiceHandler {
                 ).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        System.out.println("Failurees"+e.getMessage());
                     }
                 });
                 dbRef.child("next_bid_id").setValue(
@@ -59,8 +62,7 @@ public class NetworkServiceHandler {
         });
     }
 
-    public static String getCurrentUsersId() {
-        checkInit();
-        return auth.getCurrentUser().getUid();
+    public String getCurrentUsersId() {
+        return instance.auth.getCurrentUser().getUid();
     }
 }
