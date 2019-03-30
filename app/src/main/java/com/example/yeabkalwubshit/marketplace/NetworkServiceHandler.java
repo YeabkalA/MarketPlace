@@ -27,8 +27,8 @@ public class NetworkServiceHandler {
         return instance;
     }
 
-    private static FirebaseAuth auth;
-    private static FirebaseDatabase database;
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
 
 
     public void bidForItem(final String itemId, final Bid bid) {
