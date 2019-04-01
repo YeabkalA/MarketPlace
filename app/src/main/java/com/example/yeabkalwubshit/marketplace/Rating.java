@@ -2,7 +2,7 @@ package com.example.yeabkalwubshit.marketplace;
 
 import java.util.HashMap;
 
-public class Rating {
+public class Rating implements DatabaseStorable{
     private double value;
     private int count;
 
@@ -19,6 +19,7 @@ public class Rating {
         return String.format("%.2f", value);
     }
 
+    @Override
     public HashMap<String, Object> createMap() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("value", value);

@@ -2,7 +2,7 @@ package com.example.yeabkalwubshit.marketplace;
 
 import java.util.HashMap;
 
-public class Bid {
+public class Bid implements DatabaseStorable {
 
     static class Builder {
 
@@ -74,6 +74,7 @@ public class Bid {
     private String itemId;
     private Long valueInCents;
 
+    @Override
     public HashMap<String, Object> createMap() {
         HashMap<String, Object> ret = new HashMap<>();
         ret.put("ownerId", ownerId);

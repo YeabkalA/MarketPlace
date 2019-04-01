@@ -2,14 +2,7 @@ package com.example.yeabkalwubshit.marketplace;
 
 import java.util.HashMap;
 
-public class User {
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
-    }
+public class User implements DatabaseStorable {
 
     private String userName;
     private String firstName;
@@ -90,6 +83,14 @@ public class User {
         this.email = email;
     }
 
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -127,6 +128,7 @@ public class User {
 
     public String getCreatedOn() { return createdOn; }
 
+    @Override
     public HashMap<String, Object> createMap() {
         System.out.println("Trying to make map");
         HashMap<String, Object> ret = new HashMap<>();

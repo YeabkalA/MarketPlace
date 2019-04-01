@@ -2,7 +2,7 @@ package com.example.yeabkalwubshit.marketplace;
 
 import java.util.HashMap;
 
-public class Address {
+public class Address implements DatabaseStorable{
 
     // Builder class for `Address`.
     static class Builder {
@@ -151,6 +151,7 @@ public class Address {
         }
     }
 
+    @Override
     public HashMap<String, Object> createMap() {
         HashMap<String, Object> ret = new HashMap<>();
         ret.put("line1", line1);

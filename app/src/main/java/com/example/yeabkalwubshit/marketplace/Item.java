@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Item {
+public class Item implements DatabaseStorable {
 
     private String id;
     private String description;
@@ -195,6 +195,7 @@ public class Item {
         return this.condition.equals("NEW") || this.condition.equals("USED");
     }
 
+    @Override
     public HashMap<String, Object> createMap() {
         HashMap<String, Object> ret = new HashMap<>();
         if(id != null) {
