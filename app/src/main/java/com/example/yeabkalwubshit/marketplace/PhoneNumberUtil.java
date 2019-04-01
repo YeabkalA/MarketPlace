@@ -8,26 +8,15 @@ public class PhoneNumberUtil {
 
             if(split.length != 3) return false;
 
-            try {
-                Integer.parseInt(split[0]);
-            }
-            catch (Exception e) {
-                return false;
-            }
-
-            try {
-                Integer.parseInt(split[1]);
-            }
-            catch (Exception e) {
-                return false;
+            for(String part: split) {
+                try {
+                    Integer.parseInt(part);
+                }
+                catch (Exception e) {
+                    return false;
+                }
             }
 
-            try {
-                Integer.parseInt(split[2]);
-            }
-            catch (Exception e) {
-                return false;
-            }
             return split[0].length() == 3
                     && split[1].length() == 3 && split[2].length() == 4;
         }
