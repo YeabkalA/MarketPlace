@@ -103,7 +103,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         double distance = -1;
         System.out.println("OZ" + item.getOwnerZip());
         try {
-            double d = AddressNetworkServices.getDistanceBetweenTwoZips(item.getOwnerZip(), "75062", "mi");
+            double d = AddressNetworkServices.getDistanceBetweenTwoZips("75240", "75062", "mi");
             distance = d;
             System.out.println("Gotzz" + d);
         } catch(Exception e) {
