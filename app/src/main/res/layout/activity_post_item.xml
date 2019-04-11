@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/condition_new"
-                    android:buttonTint="@color/green"
+                    android:buttonTint="@color/colorPrimaryDark"
                     android:textColor="@android:color/black" />
 
                 <RadioButton
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/condition_used"
-                    android:buttonTint="@color/green"
+                    android:buttonTint="@color/colorPrimaryDark"
                     android:textColor="@android:color/black" />
             </RadioGroup>
         </LinearLayout>

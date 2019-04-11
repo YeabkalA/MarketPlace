@@ -161,4 +161,14 @@ public class Address implements DatabaseStorable{
         ret.put("zip", zip);
         return ret;
     }
+
+    public void populateFromMap(HashMap<String, Object> map) {
+        String city = (String) map.get("city");
+        String zip = (String) map.get("zip");
+        String state = (String) map.get("state");
+
+        setCity(city);
+        setState(state);
+        setZip(zip);
+    }
 }

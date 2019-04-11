@@ -12,6 +12,8 @@ public class User implements DatabaseStorable {
     private String phoneNumber;
     private Rating rating;
 
+    private String imageURL;
+
     private String imageUrl;
 
     private String createdOn;
@@ -49,6 +51,11 @@ public class User implements DatabaseStorable {
 
         public Builder setCreatedOn(String createdOn) {
             this.user.createdOn = createdOn;
+            return this;
+        }
+
+        public Builder setImageURL(String imageURL) {
+            this.user.imageUrl = imageURL;
             return this;
         }
 
@@ -128,6 +135,10 @@ public class User implements DatabaseStorable {
 
     public String getCreatedOn() { return createdOn; }
 
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
+
     @Override
     public HashMap<String, Object> createMap() {
         System.out.println("Trying to make map");
@@ -141,6 +152,26 @@ public class User implements DatabaseStorable {
         ret.put("rating", rating.createMap());
         ret.put("imageUrl", imageUrl);
         ret.put("userName", userName);
+        if(userName != null) ret.put("imageURL", imageUrl);
         return ret;
     }
+
+    public void populateFromMap(HashMap<String, Object> map) {
+        String firstName = (String) map.get("firstName");
+        String lastName = (String) map.get("lastName");
+        String email = (String) map.get("email");
+        String phone = (String) map.get("phoneNumber");
+
+        HashMap<String, Object> addressInfo = (HashMap) map.get("address");
+        Address address = new Address();
+        address.populateFromMap(addressInfo);
+
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setPhoneNumber(phone);
+
+        setAddress(address);
+    }
+
 }

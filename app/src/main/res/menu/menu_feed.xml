@@ -29,4 +29,10 @@
         android:icon="@drawable/ic_refresh_black_24dp"
         android:id="@+id/action_refresh"
         android:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_admin_display"
+        android:orderInCategory="100"
+        android:title="Manage Account"
+        app:showAsAction="never" />
 </menu>

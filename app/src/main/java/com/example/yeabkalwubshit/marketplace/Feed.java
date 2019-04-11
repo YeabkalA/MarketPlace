@@ -68,14 +68,10 @@ public class Feed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-//        ActionBar actionBar = getSupportActionBar();
-//        int actionBarColor = Color.rgb(40,60,250);
-//        int darkerColor = Color.rgb(10,30,200);
-//        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
-//        getWindow().setStatusBarColor(darkerColor);
 
         mFeedList = findViewById(R.id.feedItemsList);
         mFeedList.setHasFixedSize(true);
+
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         mFeedList.setLayoutManager(layoutManager);
@@ -92,7 +88,6 @@ public class Feed extends AppCompatActivity {
 
         refreshFeed();
 
-
     }
 
     private void initUI() {
@@ -100,6 +95,8 @@ public class Feed extends AppCompatActivity {
     }
 
     private void fillItems() {
+        String uri = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        System.out.println(uri + " is the URI ");
         items = new ArrayList<>();
         System.out.println(dataOrigin);
         for(String key : dataOrigin.keySet()) {
@@ -130,7 +127,6 @@ public class Feed extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
@@ -193,6 +189,16 @@ public class Feed extends AppCompatActivity {
                 return true;
             }
         });
+
+        MenuItem manageAccount = menu.getItem(4);
+        manageAccount.setVisible(true);
+        manageAccount.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                openAccountManagementPage();
+                return true;
+            }
+        });
         return true;
 
     }
@@ -200,6 +206,27 @@ public class Feed extends AppCompatActivity {
     void openPostItem() {
         Intent intent = new Intent(Feed.this, PostItemActivity.class);
         startActivity(intent);
+    }
+
+    void openAccountManagementPage() {
+        final Intent intent = new Intent(Feed.this, UserAccountAdmin.class);
+        NetworkServiceHandler networkServiceHandler = NetworkServiceHandler.getInstance();
+        String uid = networkServiceHandler.getCurrentUsersId();
+        mRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String, Object> userData = (HashMap) dataSnapshot.getValue();
+                User user = new User();
+                user.populateFromMap(userData);
+                UserAccountAdmin.user = user;
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     void goToHomePage() {

@@ -32,7 +32,8 @@
         <activity android:name=".PostItemActivity" />
         <activity
             android:name=".ItemDetailView"
-            android:label="@string/title_activity_item_detail_view"></activity>
+            android:label="@string/title_activity_item_detail_view" />
+        <activity android:name=".UserAccountAdmin"></activity>
     </application>
 
 </manifest>

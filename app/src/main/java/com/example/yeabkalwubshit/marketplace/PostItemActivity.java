@@ -67,13 +67,7 @@ public class PostItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_item);
-
-        ActionBar actionBar = getSupportActionBar();
-        int actionBarColor = Color.rgb(40, 150, 8);
-        int darkerColor = Color.rgb(30, 145, 8);
-        actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
         setTitle("Add Item");
-        getWindow().setStatusBarColor(darkerColor);
 
         firebaseStorage = FirebaseStorage.getInstance();
         ref = firebaseStorage.getReference();
@@ -90,7 +84,13 @@ public class PostItemActivity extends AppCompatActivity {
         mUploadImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseImage();
+                if(filePath != null) {
+                    mImageDesc.setText("");
+                    filePath = null;
+                    mUploadImageBtn.setText("Upload Image");
+                } else {
+                    chooseImage();
+                }
             }
         });
 
@@ -265,6 +265,7 @@ public class PostItemActivity extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             filePath = data.getData();
             mImageDesc.setText("Image uploaded");
+            mUploadImageBtn.setText("Remove Image");
 //            try {
 ////                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 ////                mImage.setImageBitmap(bitmap);

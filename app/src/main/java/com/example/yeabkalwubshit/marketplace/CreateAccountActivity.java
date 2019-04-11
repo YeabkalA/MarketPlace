@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -102,13 +103,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         mUploadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!imageUploaded) {
+                if(filePath == null) {
                     chooseImage();
-                    imageUploaded = true;
                 } else {
                     filePath = null;
                     mUploadImageButton.setText("Upload Image");
-                    imageUploaded = false;
                     mImageDesc.setText("");
                 }
             }
@@ -147,13 +146,22 @@ public class CreateAccountActivity extends AppCompatActivity {
                                         myRef.child("users").child(currentUser.getUid())
                                                 .setValue(user.createMap());
                                         uploadImage(CreateAccountActivity.this, currentUser.getUid());
+
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        String displayName = mUserName.getText().toString();
+
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(displayName).build();
+
+                                        user.updateProfile(profileUpdates);
+
+
                                         Toast.makeText(getApplicationContext(),
                                                 "Successfully created account for "
                                                         + user.getEmail(),
                                                 Toast.LENGTH_LONG).show();
                                         goToHomepage();
                                     }
-
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
@@ -321,6 +329,12 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private void uploadImage(Activity act, String imageId) {
         if(filePath != null) {
+            FirebaseUser user = mAuth.getCurrentUser();
+
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setPhotoUri(Uri.parse(imageId)).build();
+            user.updateProfile(profileUpdates);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
             final Dialog dialog = builder.create();
@@ -358,7 +372,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             mImageDesc.setText("Image uploaded: " + filePath.getPath());
             mUploadImageButton.setText("Remove Image");
         }
-
     }
 
     private String getImagePathString(String userId) {
