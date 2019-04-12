@@ -1,41 +1,17 @@
 package com.example.yeabkalwubshit.marketplace;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SearchRecentSuggestionsProvider;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
-import android.net.Uri;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,20 +70,22 @@ public class Feed extends AppCompatActivity {
         mFeedList = findViewById(R.id.feedItemsList);
     }
 
-    private void fillItems() {
-        String uri = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        System.out.println(uri + " is the URI ");
-        items = new ArrayList<>();
-        System.out.println(dataOrigin);
-        for(String key : dataOrigin.keySet()) {
-            if(key.equals("next_item_id")) continue;
-            HashMap<String, Object> itemData = (HashMap) dataOrigin.get(key);
-            System.out.println(itemData);
+    private void fillItems(boolean fetchItemFromDataOrigin) {
+        if(fetchItemFromDataOrigin) {
+            String uri = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+            System.out.println(uri + " is the URI ");
+            items = new ArrayList<>();
+            System.out.println(dataOrigin);
+            for(String key : dataOrigin.keySet()) {
+                if(key.equals("next_item_id")) continue;
+                HashMap<String, Object> itemData = (HashMap) dataOrigin.get(key);
+                System.out.println(itemData);
 
-            Item item = new Item();
-            item.populateFromMap(itemData);
+                Item item = new Item();
+                item.populateFromMap(itemData);
 
-            items.add(item);
+                items.add(item);
+            }
         }
         mAdapter = new FeedListAdapter(items,this);
         mFeedList.setAdapter(mAdapter);
@@ -119,7 +97,7 @@ public class Feed extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap) dataSnapshot.getValue();
                 dataOrigin = data;
-                fillItems();
+                fillItems(true);
             }
 
             @Override
@@ -144,6 +122,9 @@ public class Feed extends AppCompatActivity {
                                 new SearchRecentSuggestions(getApplicationContext(),
                                         SampleRecentSuggestionProvider.AUTHORITY,
                                         SampleRecentSuggestionProvider.MODE);
+                        ItemSearcher searcher = new ItemSearcher(items);
+                        items = searcher.runQuery(query, items.size());
+                        fillItems(false);
                         suggestions.saveRecentQuery(query, null);
                         return false;
                     }
@@ -199,6 +180,16 @@ public class Feed extends AppCompatActivity {
                 return true;
             }
         });
+
+        MenuItem outgoingBids = menu.getItem(5);
+        outgoingBids.setVisible(true);
+        outgoingBids.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                openOutgoingBidsPage();
+                return true;
+            }
+        });
         return true;
 
     }
@@ -231,6 +222,11 @@ public class Feed extends AppCompatActivity {
 
     void goToHomePage() {
         Intent intent = new Intent(Feed.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    void openOutgoingBidsPage() {
+        Intent intent = new Intent(Feed.this, OutgoingBids.class);
         startActivity(intent);
     }
 }

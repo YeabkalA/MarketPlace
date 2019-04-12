@@ -1,6 +1,8 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class User implements DatabaseStorable {
 
@@ -12,11 +14,21 @@ public class User implements DatabaseStorable {
     private String phoneNumber;
     private Rating rating;
 
+    private List<Bid> bids;
+
     private String imageURL;
 
     private String imageUrl;
 
     private String createdOn;
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
 
     static class Builder {
         private User user;
@@ -70,6 +82,10 @@ public class User implements DatabaseStorable {
         return this.address.isValid()
                 && EmailUtil.validateEmail(this.email)
                 && PhoneNumberUtil.validPhoneNumber(this.phoneNumber);
+    }
+
+    public User() {
+        this.bids = new ArrayList<>();
     }
 
     public void setUserName(String userName) { this.userName = userName; }
@@ -165,6 +181,15 @@ public class User implements DatabaseStorable {
         HashMap<String, Object> addressInfo = (HashMap) map.get("address");
         Address address = new Address();
         address.populateFromMap(addressInfo);
+
+        if(map.containsKey("bids")) {
+            System.out.println("BIDS" + map.get("bids").toString());
+            HashMap<String, Object> bids = (HashMap) map.get("bids");
+            for(String bidId: bids.keySet()) {
+                Bid bid = Bid.bidFromMap((HashMap) bids.get(bidId));
+                this.bids.add(bid);
+            }
+        }
 
         setFirstName(firstName);
         setLastName(lastName);

@@ -33,7 +33,10 @@
         <activity
             android:name=".ItemDetailView"
             android:label="@string/title_activity_item_detail_view" />
-        <activity android:name=".UserAccountAdmin"></activity>
+        <activity android:name=".UserAccountAdmin" />
+        <activity
+            android:name=".OutgoingBids"
+            android:label="@string/title_activity_outgoing_bids"></activity>
     </application>
 
 </manifest>

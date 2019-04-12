@@ -35,4 +35,10 @@
         android:orderInCategory="100"
         android:title="Manage Account"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_outgoing_bids_display"
+        android:orderInCategory="100"
+        android:title="Outgoing Bids"
+        app:showAsAction="never" />
 </menu>

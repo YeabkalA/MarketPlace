@@ -32,6 +32,11 @@ public class Bid implements DatabaseStorable {
             return this;
         }
 
+        public Builder setId(Long val) {
+            this.bid.setId(val);
+            return this;
+        }
+
         public Bid build() {
             return bid;
         }
@@ -74,6 +79,16 @@ public class Bid implements DatabaseStorable {
     private String itemId;
     private Long valueInCents;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    private Long id;
+
     @Override
     public HashMap<String, Object> createMap() {
         HashMap<String, Object> ret = new HashMap<>();
@@ -81,6 +96,7 @@ public class Bid implements DatabaseStorable {
         ret.put("issuerId", issuerId);
         ret.put("itemId", itemId);
         ret.put("valueInCents", valueInCents);
+        ret.put("id", id);
         return ret;
     }
 
@@ -91,6 +107,7 @@ public class Bid implements DatabaseStorable {
                 .setIssuerId((String) map.get("issuerId"))
                 .setItemId((String) map.get("itemId"))
                 .setValueInCents((Long) map.get("valueInCents"))
+                .setId((Long) map.get("id"))
                 .build();
         return bid;
     }

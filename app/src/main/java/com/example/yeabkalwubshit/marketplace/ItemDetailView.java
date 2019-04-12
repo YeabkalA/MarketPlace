@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.Task;
@@ -136,6 +137,9 @@ public class ItemDetailView extends Activity {
                     value = Double.parseDouble(bidEntryBox.getText().toString());
                 } catch (Exception e) {
                     bidEntryBox.setError("Enter a valid number.");
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter a valid number.",
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
