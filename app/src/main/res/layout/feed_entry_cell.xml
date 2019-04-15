@@ -68,21 +68,12 @@
                         android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/textView23"
-                            android:layout_width="wrap_content"
-                            android:layout_marginHorizontal="5dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Posted By:"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/itemPosterUserName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="yeaba" />
+                            android:text="" />
                     </LinearLayout>
 
                     <LinearLayout

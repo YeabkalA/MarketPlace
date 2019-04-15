@@ -16,8 +16,6 @@ public class User implements DatabaseStorable {
 
     private List<Bid> bids;
 
-    private String imageURL;
-
     private String imageUrl;
 
     private String createdOn;
@@ -151,9 +149,7 @@ public class User implements DatabaseStorable {
 
     public String getCreatedOn() { return createdOn; }
 
-    public String getImageURL() { return imageURL; }
-
-    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
+    public void setImageURL(String imageURL) { this.imageUrl = imageURL; }
 
     @Override
     public HashMap<String, Object> createMap() {
@@ -168,7 +164,6 @@ public class User implements DatabaseStorable {
         ret.put("rating", rating.createMap());
         ret.put("imageUrl", imageUrl);
         ret.put("userName", userName);
-        if(userName != null) ret.put("imageURL", imageUrl);
         return ret;
     }
 
@@ -191,11 +186,14 @@ public class User implements DatabaseStorable {
             }
         }
 
+        if(map.containsKey("imageUrl")) {
+            setImageURL(imageUrl);
+        }
+
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setPhoneNumber(phone);
-
         setAddress(address);
     }
 

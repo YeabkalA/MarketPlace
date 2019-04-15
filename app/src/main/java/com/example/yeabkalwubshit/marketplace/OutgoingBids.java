@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 public class OutgoingBids extends AppCompatActivity {
 
     private RecyclerView mOutgoingBidsList;
+    private ProgressBar mProgressBar;
     private NetworkServiceHandler networkServiceHandler;
     private FirebaseDatabase database;
     private DatabaseReference mRef;
@@ -48,12 +51,14 @@ public class OutgoingBids extends AppCompatActivity {
 
     void init() {
         mOutgoingBidsList = findViewById(R.id.outgoingBidsList);
+        mProgressBar = findViewById(R.id.outgoingBidsProgress);
         networkServiceHandler = NetworkServiceHandler.getInstance();
         database = FirebaseDatabase.getInstance();
         mRef = database.getReference();
     }
 
     void fetchDataAndSetupAdapter() {
+        mProgressBar.setVisibility(View.VISIBLE);
         String currentUser = networkServiceHandler.getCurrentUsersId();
         mRef.child("users").child(currentUser).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -64,6 +69,7 @@ public class OutgoingBids extends AppCompatActivity {
                         bids = new ArrayList<>(user.getBids());
                         mAdapter = new OutgoingBidsAdapter(bids, OutgoingBids.this);
                         mOutgoingBidsList.setAdapter(mAdapter);
+                        mProgressBar.setVisibility(View.GONE);
                     }
 
                     @Override

@@ -40,6 +40,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class PostItemActivity extends AppCompatActivity {
 
@@ -112,7 +113,9 @@ public class PostItemActivity extends AppCompatActivity {
                                             Item item = setItem(nextId);
                                             if(item != null) {
                                                 String uid = mAuth.getUid();
+                                                String userName = mAuth.getCurrentUser().getDisplayName();
                                                 item.setOwnerId(uid);
+                                                item.setOwnerUserName(userName);
                                                 mDbRef.child("items")
                                                         .child("next_item_id")
                                                         .setValue(nextId + 1);
@@ -125,9 +128,13 @@ public class PostItemActivity extends AppCompatActivity {
                                                 }
                                                 mDbRef.child("items").child(item.getId())
                                                         .setValue(item.createMap());
+                                                HashMap<String, String> itemBasicInfo =
+                                                        new HashMap<>();
+                                                itemBasicInfo.put("title", item.getTitle());
+                                                itemBasicInfo.put("id", item.getId());
                                                 mDbRef.child("users").child(uid).child("items")
                                                         .child(Long.toString(nextId))
-                                                        .setValue(todayStr);
+                                                        .setValue(itemBasicInfo);
                                                 uploadImage(PostItemActivity.this, imageUrl);
 
                                                 String successText = "Successfully created item - " + item.getTitle();
@@ -203,6 +210,13 @@ public class PostItemActivity extends AppCompatActivity {
             return null;
         }
 
+        if(filePath == null) {
+            Toast.makeText(getApplicationContext(),
+                    "Please, select image for your item",
+                    Toast.LENGTH_LONG).show();
+            return null;
+        }
+
         Item item = new Item.Builder()
                 .setTitle(title)
                 .setDescription(description)
@@ -236,23 +250,31 @@ public class PostItemActivity extends AppCompatActivity {
             dialog.show();
             dialog.setTitle("Creating your item...");
 
-            ref.child(imageUrl).putFile(filePath)
-                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            dialog.dismiss();
-                            Toast.makeText(PostItemActivity.this, "Created Item",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    dialog.dismiss();
-                    Toast.makeText(PostItemActivity.this, "Please try again later",
-                            Toast.LENGTH_LONG);
+            Task task = ref.child(imageUrl).putFile(filePath);
 
+            try {
+                while(!task.isComplete()) {
+                    Thread.sleep(10);
                 }
-            });
+                task.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        dialog.dismiss();
+                        Toast.makeText(PostItemActivity.this, "Created Item",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(PostItemActivity.this, "Please try again later",
+                                Toast.LENGTH_LONG);
+
+                    }
+                });
+            } catch (Exception e){}
+
+
         } else {
             Toast.makeText(PostItemActivity.this, "NO ITEM", Toast.LENGTH_LONG);
         }

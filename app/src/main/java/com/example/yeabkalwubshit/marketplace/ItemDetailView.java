@@ -31,6 +31,7 @@ public class ItemDetailView extends Activity {
 
     static Item item;
 
+    private TextView mTitle;
     private TextView mDescription;
     private TextView mPosterInfo;
     private TextView mCategory;
@@ -47,6 +48,8 @@ public class ItemDetailView extends Activity {
     private DatabaseReference mRef;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
+
+    private NetworkServiceHandler networkServiceHandler = NetworkServiceHandler.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class ItemDetailView extends Activity {
     }
 
     void initUI() {
+        mTitle = findViewById(R.id.itemDetailTitle);
         mDescription = findViewById(R.id.itemDetailDescription);
         mPosterInfo = findViewById(R.id.itemDetailPoster);
         mNewUsed = findViewById(R.id.itemDetailNewUsed);
@@ -85,9 +89,15 @@ public class ItemDetailView extends Activity {
         mWinningBid = findViewById(R.id.itemDetailWinningBid);
         mNumOfBids = findViewById(R.id.itemDetailNumOfBids);
         mBiddingButton = findViewById(R.id.biddingButton);
+
+        String currentUserId = networkServiceHandler.getCurrentUsersId();
+        if(item.getOwnerId().equals(currentUserId)) {
+            mBiddingButton.setVisibility(View.GONE);
+        }
     }
 
     void setUpUI() {
+        mTitle.setText(item.getTitle());
         mDescription.setText(item.getDescription());
         mPosterInfo.setText("by " + "yeaba");
         mNewUsed.setText(item.getCondition());
@@ -142,8 +152,6 @@ public class ItemDetailView extends Activity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                NetworkServiceHandler networkServiceHandler = NetworkServiceHandler.getInstance();
 
                 Bid bid = new Bid.Builder()
                         .setItemId(item.getId())

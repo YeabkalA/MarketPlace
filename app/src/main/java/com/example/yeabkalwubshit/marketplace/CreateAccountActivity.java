@@ -143,9 +143,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     public void onSuccess(AuthResult authResult) {
 
                                         FirebaseUser currentUser = authResult.getUser();
+                                        uploadImage(CreateAccountActivity.this, currentUser.getUid(), user);
+                                        System.out.println ("What is going on? " + user.getImageUrl());
+                                        System.out.println(user.createMap() + "<<<<<");
                                         myRef.child("users").child(currentUser.getUid())
                                                 .setValue(user.createMap());
-                                        uploadImage(CreateAccountActivity.this, currentUser.getUid());
+
 
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         String displayName = mUserName.getText().toString();
@@ -327,27 +330,25 @@ public class CreateAccountActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void uploadImage(Activity act, String imageId) {
+    private void uploadImage(Activity act, String imageId, User user) {
         if(filePath != null) {
-            FirebaseUser user = mAuth.getCurrentUser();
-
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setPhotoUri(Uri.parse(imageId)).build();
-            user.updateProfile(profileUpdates);
+            FirebaseUser currentUser = mAuth.getCurrentUser();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
             final Dialog dialog = builder.create();
             dialog.show();
-            dialog.setTitle("Creating your item...");
+            dialog.setTitle("Creating your account...");
 
-            ref.child(getImagePathString(imageId)).putFile(filePath)
+            String imageStoragePath = getImagePathString(imageId);
+            user.setImageURL(imageStoragePath);
+            System.out.println("Set image url of user to " + imageStoragePath);
+
+            ref.child(imageStoragePath).putFile(filePath)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             dialog.dismiss();
-                            Toast.makeText(CreateAccountActivity.this, "Created Item",
-                                    Toast.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override

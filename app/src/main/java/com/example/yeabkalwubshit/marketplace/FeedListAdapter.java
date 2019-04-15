@@ -38,6 +38,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         public TextView distance;
         public ViewPager viewPager;
         public TextView category;
+        public TextView posterUserName;
 
         public View layout;
 
@@ -55,6 +56,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
             rating = v.findViewById(R.id.feedItemRating);
             viewPager = v.findViewById(R.id.feedViewPager);
             category = v.findViewById(R.id.feedItemCategory);
+            posterUserName = v.findViewById(R.id.itemPosterUserName);
 
             mStorage = FirebaseStorage.getInstance();
             mStorageRef = mStorage.getReference();
@@ -122,6 +124,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         holder.newUsed.setText(item.getCondition());
         holder.rating.setRating(position%5 + 1);
         holder.category.setText(item.getCategory() == null ? "NO CATEG " : item.getCategory());
+        holder.posterUserName.setText(item.getOwnerUserName() == null ? "NOT AVAIL" : item.getOwnerUserName());
 
 
         holder.itemView.setOnClickListener(new OnClickListener() {

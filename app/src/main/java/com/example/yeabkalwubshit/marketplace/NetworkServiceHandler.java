@@ -95,4 +95,16 @@ public class NetworkServiceHandler {
     public String getCurrentUsersId() {
         return instance.auth.getCurrentUser().getUid();
     }
+
+    public void removeBidFromUserData(Bid bid) {
+        DatabaseReference ref = database.getReference();
+        ref.child("users").child(bid.getIssuerId()).child("bids").child(bid.getId().toString()).removeValue();
+    }
+
+    public void removeItem(Item item) {
+        DatabaseReference ref = database.getReference();
+        String ownerId = item.getOwnerId();
+        ref.child("users").child(ownerId).child("items").child(item.getId()).removeValue();
+        ref.child("items").child(item.getId()).removeValue();
+    }
 }

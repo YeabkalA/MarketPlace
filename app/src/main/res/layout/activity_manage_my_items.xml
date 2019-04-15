@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Feed">
+    tools:context=".ManageMyItems">
 
-    <TextView
-        android:id="@+id/feedNoItemDisplay"
+    <ProgressBar
+        android:id="@+id/manageItemsProgress"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No item in market." />
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/feedItemsList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/manageItemsList"
+        android:layout_width="344dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"/>
 </LinearLayout>

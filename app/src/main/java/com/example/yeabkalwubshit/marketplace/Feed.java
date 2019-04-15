@@ -9,7 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 public class Feed extends AppCompatActivity {
 
     private RecyclerView mFeedList;
+    private TextView mFeedNoItemDisplay;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -67,6 +70,7 @@ public class Feed extends AppCompatActivity {
     }
 
     private void initUI() {
+        mFeedNoItemDisplay = findViewById(R.id.feedNoItemDisplay);
         mFeedList = findViewById(R.id.feedItemsList);
     }
 
@@ -89,13 +93,17 @@ public class Feed extends AppCompatActivity {
         }
         mAdapter = new FeedListAdapter(items,this);
         mFeedList.setAdapter(mAdapter);
+        if(mAdapter.getItemCount() != 0) mFeedNoItemDisplay.setVisibility(View.GONE);
+        else mFeedNoItemDisplay.setVisibility(View.VISIBLE);
     }
 
     private void refreshFeed() {
         mRef.child("items").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("Direct = " + dataSnapshot.toString());
                 HashMap<String, Object> data = (HashMap) dataSnapshot.getValue();
+                System.out.println("After changing to map " + data);
                 dataOrigin = data;
                 fillItems(true);
             }
@@ -190,6 +198,16 @@ public class Feed extends AppCompatActivity {
                 return true;
             }
         });
+
+        MenuItem manageItems = menu.getItem(6);
+        manageItems.setVisible(true);
+        manageItems.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                openItemManagementPage();
+                return true;
+            }
+        });
         return true;
 
     }
@@ -227,6 +245,11 @@ public class Feed extends AppCompatActivity {
 
     void openOutgoingBidsPage() {
         Intent intent = new Intent(Feed.this, OutgoingBids.class);
+        startActivity(intent);
+    }
+
+    void openItemManagementPage() {
+        Intent intent = new Intent(Feed.this, ManageMyItems.class);
         startActivity(intent);
     }
 }

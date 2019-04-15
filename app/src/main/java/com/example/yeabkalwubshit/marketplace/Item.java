@@ -17,6 +17,16 @@ public class Item implements DatabaseStorable {
     private String postedOn;
     private Bid winningBid;
 
+    public String getOwnerUserName() {
+        return ownerUserName;
+    }
+
+    public void setOwnerUserName(String ownerUserName) {
+        this.ownerUserName = ownerUserName;
+    }
+
+    private String ownerUserName;
+
     public List<Bid> getBids() {
         return bids;
     }
@@ -94,6 +104,11 @@ public class Item implements DatabaseStorable {
 
         public Builder setCategory(String category) {
             this.item.category = category;
+            return this;
+        }
+
+        public Builder setOwnerUserName(String ownerUserName) {
+            this.item.ownerUserName = ownerUserName;
             return this;
         }
 
@@ -227,6 +242,7 @@ public class Item implements DatabaseStorable {
         }
 
         ret.put("category", category);
+        ret.put("ownerUserName", ownerUserName);
 
         return ret;
     }
@@ -243,6 +259,7 @@ public class Item implements DatabaseStorable {
         String ownerZip = (String) map.get("owner_zip");
         String imageURL = (String) map.get("imageURL");
         String category = (String) map.get("category");
+        String ownerUserName = (String) map.get("ownerUserName");
 
         if(map.containsKey("bids")) {
             System.out.println("BIDS" + map.get("bids").toString());
@@ -263,7 +280,7 @@ public class Item implements DatabaseStorable {
         setOwnerZip(ownerZip);
         setImageURL(imageURL);
         setCategory(category);
-
+        setOwnerUserName(ownerUserName);
         return true;
     }
 

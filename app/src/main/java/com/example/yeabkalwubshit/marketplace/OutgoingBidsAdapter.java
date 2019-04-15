@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +78,7 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
         mRef.child("items").child(bid.getItemId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Item item = new Item();
+                final Item item = new Item();
                 item.populateFromMap((HashMap) dataSnapshot.getValue());
                 Bid winningBid = item.calculateWinningBid();
                 boolean betterBid = bid.getValueInCents() >= winningBid.getValueInCents();
@@ -86,9 +87,18 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
 
                 int green = Color.rgb(50, 200, 50);
                 int red = Color.rgb(200, 50, 50);
-                
+
                 holder.status.setBackgroundColor(betterBid ? green : red);
                 holder.winningBid.setText("Winning: " + Item.getDollarRepresentation(winningBid.getValueInCents()));
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ItemDetailView.class);
+                        ItemDetailView.item = item;
+                        context.startActivity(intent);
+                    }
+                });
             }
 
             @Override
