@@ -101,6 +101,17 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
                 remove(position);
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ItemDetailView.class);
+                ItemDetailView.item = item;
+                context.startActivity(intent);
+            }
+        });
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

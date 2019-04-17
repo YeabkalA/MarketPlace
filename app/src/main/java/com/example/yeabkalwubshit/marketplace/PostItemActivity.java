@@ -40,6 +40,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PostItemActivity extends AppCompatActivity {
@@ -52,12 +53,15 @@ public class PostItemActivity extends AppCompatActivity {
     private RadioButton mNewBtn;
     private RadioButton mUsedBtn;
     private Button mUploadImageBtn;
+    private Button mRemoveImagesBtn;
 
-    private ImageView mImage;
-    private Uri filePath;
-    private TextView mImageDesc;
+    private ArrayList<Uri> filePaths;
 
     private Spinner mCategory;
+    private ImageView[] checkBoxes;
+    private TextView[] imageDescs;
+
+    private String[] imageUrlMemo = {"", "", ""};
 
     private final int PICK_IMAGE_REQUEST = 71;
 
@@ -85,13 +89,21 @@ public class PostItemActivity extends AppCompatActivity {
         mUploadImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(filePath != null) {
-                    mImageDesc.setText("");
-                    filePath = null;
-                    mUploadImageBtn.setText("Upload Image");
-                } else {
-                    chooseImage();
+                if(filePaths != null && filePaths.size()==3) {
+                    Toast.makeText(getApplicationContext(),
+                            "You cannot upload more than 3 images.",
+                            Toast.LENGTH_LONG).show();
+                    return;
                 }
+                chooseImage();
+            }
+        });
+
+        mRemoveImagesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeImages();
+                updateImageDescAndCheckBoxes();
             }
         });
 
@@ -122,10 +134,15 @@ public class PostItemActivity extends AppCompatActivity {
                                                 DateUtil dateUtil = new DateUtil();
                                                 String todayStr = dateUtil.today();
                                                 item.setPostedOn(todayStr);
-                                                String imageUrl = getImagePathString(Long.toString(nextId));
-                                                if(filePath != null) {
-                                                    item.setImageURL(imageUrl);
+                                                String itemId = Long.toString(nextId);
+
+                                                for(int i=0; i<filePaths.size(); i++) {
+                                                    item.addImageUrl(getImagePathString(itemId, i));
                                                 }
+
+//                                                if(filePath != null) {
+//                                                    item.setImageURL(imageUrl);
+//                                                }
                                                 mDbRef.child("items").child(item.getId())
                                                         .setValue(item.createMap());
                                                 HashMap<String, String> itemBasicInfo =
@@ -135,7 +152,7 @@ public class PostItemActivity extends AppCompatActivity {
                                                 mDbRef.child("users").child(uid).child("items")
                                                         .child(Long.toString(nextId))
                                                         .setValue(itemBasicInfo);
-                                                uploadImage(PostItemActivity.this, imageUrl);
+                                                uploadImage(PostItemActivity.this, itemId);
 
                                                 String successText = "Successfully created item - " + item.getTitle();
                                                 Toast.makeText(PostItemActivity.this, successText,
@@ -158,6 +175,7 @@ public class PostItemActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        filePaths = new ArrayList<>();
         mDescription = findViewById(R.id.itemDescription);
         mTitle = findViewById(R.id.itemTitle);
         mPrice = findViewById(R.id.itemPriceTag);
@@ -166,9 +184,29 @@ public class PostItemActivity extends AppCompatActivity {
         mUsedBtn = findViewById(R.id.usedBtn);
         mUsedBtn.setChecked(true);
         mUploadImageBtn = findViewById(R.id.uploadImageBtn);
-        mImage = findViewById(R.id.img);
-        mImageDesc = findViewById(R.id.imageDesc);
+        mRemoveImagesBtn = findViewById(R.id.removeImageBtn);
         mCategory = findViewById(R.id.itemCategory);
+
+        mRemoveImagesBtn.setVisibility(View.GONE);
+
+        checkBoxes = new ImageView[3];
+        checkBoxes[0] = findViewById(R.id.check1);
+        checkBoxes[1] = findViewById(R.id.check2);
+        checkBoxes[2] = findViewById(R.id.check3);
+
+        for(ImageView checkBox: checkBoxes) {
+            checkBox.setVisibility(View.GONE);
+        }
+
+        imageDescs = new TextView[3];
+        imageDescs[0] = findViewById(R.id.imageDesc1);
+        imageDescs[1] = findViewById(R.id.imageDesc2);
+        imageDescs[2] = findViewById(R.id.imageDesc3);
+
+        for(TextView imageDesc: imageDescs) {
+            imageDesc.setVisibility(View.GONE);
+        }
+
     }
 
     Item setItem(Long id) {
@@ -210,7 +248,7 @@ public class PostItemActivity extends AppCompatActivity {
             return null;
         }
 
-        if(filePath == null) {
+        if(filePaths == null) {
             Toast.makeText(getApplicationContext(),
                     "Please, select image for your item",
                     Toast.LENGTH_LONG).show();
@@ -242,38 +280,68 @@ public class PostItemActivity extends AppCompatActivity {
                 PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(Activity act, String imageUrl) {
-        if(filePath != null) {
+    private void removeImages() {
+        filePaths = null;
+        mRemoveImagesBtn.setVisibility(View.GONE);
+    }
+
+    private void updateImageDescAndCheckBoxes() {
+        if(filePaths == null || filePaths.size() == 0) {
+            for(int i=0; i<3; i++) {
+                imageDescs[i].setVisibility(View.GONE);
+                checkBoxes[i].setVisibility(View.GONE);
+            }
+            return;
+        }
+        int i = 0;
+        for(i=0; i < filePaths.size(); i++) {
+            imageDescs[i].setVisibility(View.VISIBLE);
+            imageDescs[i].setText(filePaths.get(i).getPath());
+            checkBoxes[i].setVisibility(View.VISIBLE);
+        }
+        while(i < 3) {
+            imageDescs[i].setVisibility(View.GONE);
+            checkBoxes[i].setVisibility(View.GONE);
+            i++;
+        }
+    }
+
+    private void uploadImage(Activity act, String itemID) {
+        if(filePaths != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
             final Dialog dialog = builder.create();
             dialog.show();
             dialog.setTitle("Creating your item...");
 
-            Task task = ref.child(imageUrl).putFile(filePath);
+            for(int i=0; i<filePaths.size(); i++) {
+                Uri filePath = filePaths.get(i);
+                String imageUrl = getImagePathString(itemID, i);
+                Task task = ref.child(imageUrl).putFile(filePath);
 
-            try {
-                while(!task.isComplete()) {
-                    Thread.sleep(10);
-                }
-                task.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        dialog.dismiss();
-                        Toast.makeText(PostItemActivity.this, "Created Item",
-                                Toast.LENGTH_LONG).show();
+                try {
+                    while(!task.isComplete()) {
+                        Thread.sleep(10);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dialog.dismiss();
-                        Toast.makeText(PostItemActivity.this, "Please try again later",
-                                Toast.LENGTH_LONG);
+                    task.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            dialog.dismiss();
+                            Toast.makeText(PostItemActivity.this, "Created Item",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            dialog.dismiss();
+                            Toast.makeText(PostItemActivity.this, "Please try again later",
+                                    Toast.LENGTH_LONG);
 
-                    }
-                });
-            } catch (Exception e){}
+                        }
+                    });
+                } catch (Exception e){}
 
+            }
 
         } else {
             Toast.makeText(PostItemActivity.this, "NO ITEM", Toast.LENGTH_LONG);
@@ -285,23 +353,24 @@ public class PostItemActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
-            filePath = data.getData();
-            mImageDesc.setText("Image uploaded");
-            mUploadImageBtn.setText("Remove Image");
-//            try {
-////                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-////                mImage.setImageBitmap(bitmap);
-//                mImageDesc.setText("Image uploaded");
-//            } catch(IOException e) {
-//                e.printStackTrace();
-//            }
+            Uri filePath = data.getData();
+            if(filePaths == null) filePaths = new ArrayList<>();
+            filePaths.add(filePath);
+            updateImageDescAndCheckBoxes();
+            mRemoveImagesBtn.setVisibility(View.VISIBLE);
         }
 
     }
 
 
 
-    private String getImagePathString(String itemId) {
-        return "images/" + itemId;
+    private String getImagePathString(String itemId, int ind) {
+        if(imageUrlMemo[ind].equals("")) {
+            String path = String.format("/images/%s/%d", itemId, ind);
+            imageUrlMemo[ind] = path;
+            return path;
+        } else {
+            return imageUrlMemo[ind];
+        }
     }
 }

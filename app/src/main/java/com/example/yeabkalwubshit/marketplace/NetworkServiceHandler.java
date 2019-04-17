@@ -35,7 +35,8 @@ public class NetworkServiceHandler {
     private FirebaseDatabase database;
 
 
-    public void bidForItem(final String itemId, final Bid bid) {
+    public void bidForItem(final Bid bid) {
+        final String itemId = bid.getItemId();
         final DatabaseReference dbRef = instance.database.getReference();
         final String currentUserId = getCurrentUsersId();
         dbRef.child("items").child(itemId).addListenerForSingleValueEvent(new ValueEventListener() {

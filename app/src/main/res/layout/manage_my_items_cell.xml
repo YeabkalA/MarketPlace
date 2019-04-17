@@ -21,6 +21,8 @@
             android:layout_margin="10px"
             android:orientation="vertical">
             <TextView
+                android:textStyle="bold"
+                android:textSize="18dp"
                 android:id="@+id/manageItemsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -29,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/manageItemsNumBids"
                     android:layout_width="wrap_content"
                     android:layout_margin="10px"
@@ -47,6 +50,7 @@
                 android:orientation="horizontal">
                 <Button
                     android:text="FINALIZE"
+                    android:textSize="10dp"
                     android:textStyle="bold"
                     android:backgroundTint="@color/darkGreen"
                     android:layout_marginHorizontal="10dp"
@@ -55,6 +59,7 @@
                     android:layout_height="wrap_content" />
                 <Button
                     android:text="DELETE"
+                    android:textSize="10dp"
                     android:textStyle="bold"
                     android:backgroundTint="@color/red"
                     android:layout_marginHorizontal="10dp"

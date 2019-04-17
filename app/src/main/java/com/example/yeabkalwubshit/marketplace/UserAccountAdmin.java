@@ -1,11 +1,18 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class UserAccountAdmin extends AppCompatActivity {
 
@@ -19,6 +26,8 @@ public class UserAccountAdmin extends AppCompatActivity {
     private EditText mEditPhoneNumber;
     private EditText mEditCity;
     private EditText mEditZip;
+
+    private ImageView mProfilePic;
     private Spinner mEditState;
 
     public static User user;
@@ -44,6 +53,7 @@ public class UserAccountAdmin extends AppCompatActivity {
         mEditCity = findViewById(R.id.adminEditCity);
         mEditZip = findViewById(R.id.adminEditZip);
         mEditState = findViewById(R.id.adminEditState);
+        mProfilePic = findViewById(R.id.adminProfilePicture);
 
         // Set up the state selection spinner.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -64,5 +74,21 @@ public class UserAccountAdmin extends AppCompatActivity {
         mEditPhoneNumber.setText(user.getPhoneNumber());
         mEditCity.setText(user.getAddress().getCity());
         mEditZip.setText(user.getAddress().getZip());
+
+        System.out.println("Got the following image url " + user.getImageUrl());
+        if(user.getImageUrl() != null && !user.getImageUrl().equals("")) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference mStorageRef = storage.getReference();
+            StorageReference islandRef = mStorageRef.child(user.getImageUrl());
+            Task<Uri> task = islandRef.getDownloadUrl();
+            while(!task.isComplete()) {}
+
+            String url = task.getResult().toString();
+            Picasso.get()
+                    .load(url)
+                    .fit()
+                    .centerCrop()
+                    .into(mProfilePic);
+        }
     }
 }

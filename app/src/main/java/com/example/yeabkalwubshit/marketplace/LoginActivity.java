@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -112,7 +114,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mCreateAccountText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSignupPage();
+                sendEmail();
+                //openSignupPage();
             }
         });
     }
@@ -373,6 +376,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void openFeeds() {
         Intent intent = new Intent(LoginActivity.this, Feed.class);
         startActivity(intent);
+    }
+
+    protected void sendEmail() {
+        Log.i("Send email", "");
+        String[] TO = {"yeaba@gmail.com"};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(LoginActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

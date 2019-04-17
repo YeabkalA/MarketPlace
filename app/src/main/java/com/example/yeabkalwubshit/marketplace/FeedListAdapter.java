@@ -136,18 +136,19 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
             }
         });
 
-        if(item.getImageURL() != null
-                && !item.getImageURL().equals("")) {
-            StorageReference islandRef = holder.mStorageRef.child(item.getImageURL());
-            Task<Uri> task = islandRef.getDownloadUrl();
-            while(!task.isComplete()) {}
-
-            String url = task.getResult().toString();
-
+        if(item.getImageUrls() != null
+                && item.getImageUrls().size() != 0) {
             ArrayList<String> viewPagerList = new ArrayList<>();
-            viewPagerList.add(url);
-            viewPagerList.add("https://d3nfwcxd527z59.cloudfront.net/content/uploads/2019/03/21104030/Francis-Coquelin-Valencia.jpg");
 
+            for(String imageUrl : item.getImageUrls()) {
+                StorageReference islandRef = holder.mStorageRef.child(imageUrl);
+                Task<Uri> task = islandRef.getDownloadUrl();
+                while(!task.isComplete()) {}
+
+                String url = task.getResult().toString();
+
+                viewPagerList.add(url);
+            }
             ViewPagerAdapter adapter = new ViewPagerAdapter(this.context, viewPagerList);
             holder.viewPager.setAdapter(adapter);
         }

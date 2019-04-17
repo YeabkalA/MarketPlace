@@ -332,8 +332,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private void uploadImage(Activity act, String imageId, User user) {
         if(filePath != null) {
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(act);
             builder.setView(R.xml.progress);
             final Dialog dialog = builder.create();

@@ -172,6 +172,7 @@ public class User implements DatabaseStorable {
         String lastName = (String) map.get("lastName");
         String email = (String) map.get("email");
         String phone = (String) map.get("phoneNumber");
+        String imageUrl = (String) map.get("imageUrl");
 
         HashMap<String, Object> addressInfo = (HashMap) map.get("address");
         Address address = new Address();
@@ -195,6 +196,7 @@ public class User implements DatabaseStorable {
         setEmail(email);
         setPhoneNumber(phone);
         setAddress(address);
+        setImageURL(imageUrl);
     }
 
 }

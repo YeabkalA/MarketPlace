@@ -99,6 +99,7 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
                         context.startActivity(intent);
                     }
                 });
+
             }
 
             @Override

@@ -10,12 +10,25 @@ public class Item implements DatabaseStorable {
     private String description;
     private String condition;
     private String ownerId;
-    private String imageURL;
     private String title;
     private Long priceInCents;
     private String ownerZip;
     private String postedOn;
     private Bid winningBid;
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
+    public void addImageUrl(String url) {
+        this.imageUrls.add(url);
+    }
+
+    private List<String> imageUrls;
 
     public String getOwnerUserName() {
         return ownerUserName;
@@ -120,6 +133,7 @@ public class Item implements DatabaseStorable {
 
     public Item() {
         bids = new ArrayList<>();
+        imageUrls = new ArrayList<>();
     }
 
     public String getId() {
@@ -144,14 +158,6 @@ public class Item implements DatabaseStorable {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
     }
 
     public String getTitle() {
@@ -231,8 +237,8 @@ public class Item implements DatabaseStorable {
         if(ownerZip != null) {
             ret.put("owner_zip", ownerZip);
         }
-        if(imageURL != null) {
-            ret.put("imageURL", imageURL);
+        if(imageUrls != null) {
+            ret.put("imageURL", imageUrls);
         }
         if(condition != null) {
             ret.put("condition", condition);
@@ -257,7 +263,7 @@ public class Item implements DatabaseStorable {
         String ownerId = (String) map.get("owner_id");
         String postedOn = (String) map.get("postedOn");
         String ownerZip = (String) map.get("owner_zip");
-        String imageURL = (String) map.get("imageURL");
+        List<String> imageURLs = (List<String>) map.get("imageURL");
         String category = (String) map.get("category");
         String ownerUserName = (String) map.get("ownerUserName");
 
@@ -278,7 +284,7 @@ public class Item implements DatabaseStorable {
         setOwnerId(ownerId);
         setPostedOn(postedOn);
         setOwnerZip(ownerZip);
-        setImageURL(imageURL);
+        this.imageUrls.addAll(imageURLs);
         setCategory(category);
         setOwnerUserName(ownerUserName);
         return true;

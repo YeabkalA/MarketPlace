@@ -91,7 +91,7 @@ public class ItemDetailView extends Activity {
         mBiddingButton = findViewById(R.id.biddingButton);
 
         String currentUserId = networkServiceHandler.getCurrentUsersId();
-        if(item.getOwnerId().equals(currentUserId)) {
+        if (item.getOwnerId().equals(currentUserId)) {
             mBiddingButton.setVisibility(View.GONE);
         }
     }
@@ -105,7 +105,7 @@ public class ItemDetailView extends Activity {
         mRatingBar.setRating(3.0f);
         mPostDate.setText("posted on " + item.getPostedOn());
         mPrice.setText(Item.getDollarRepresentation(item.getPriceInCents()));
-        if(item.getWinningBid() != null) {
+        if (item.getWinningBid() != null) {
             mWinningBid.setText(Item.getDollarRepresentation(item.getWinningBid().getValueInCents()));
         } else {
             mWinningBid.setText("NA");
@@ -115,15 +115,16 @@ public class ItemDetailView extends Activity {
 
         ArrayList<String> viewPagerList = new ArrayList<>();
 
-        if(!TextUtils.isEmpty(item.getImageURL())) {
-           StorageReference islandRef = mStorageRef.child(item.getImageURL());
-           Task<Uri> task = islandRef.getDownloadUrl();
-           while(!task.isComplete()) {}
-           String url = task.getResult().toString();
-           viewPagerList.add(url);
-       }
-
-        viewPagerList.add("https://d3nfwcxd527z59.cloudfront.net/content/uploads/2019/03/21104030/Francis-Coquelin-Valencia.jpg");
+        if (item.getImageUrls() != null && item.getImageUrls().size() != 0) {
+            for (String imageUrl : item.getImageUrls()) {
+                StorageReference islandRef = mStorageRef.child(imageUrl);
+                Task<Uri> task = islandRef.getDownloadUrl();
+                while (!task.isComplete()) {
+                }
+                String url = task.getResult().toString();
+                viewPagerList.add(url);
+            }
+        }
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getApplicationContext(), viewPagerList);
         mViewPager.setAdapter(adapter);
@@ -159,10 +160,10 @@ public class ItemDetailView extends Activity {
                         .setOwnerId(item.getOwnerId())
                         .setValueInCents((long) value * 100)
                         .build();
-                networkServiceHandler.bidForItem(item.getId(), bid);
+                networkServiceHandler.bidForItem(bid);
             }
         });
-        AlertDialog dialog = alertBuilder.show();
+        alertBuilder.show();
 
     }
 }
