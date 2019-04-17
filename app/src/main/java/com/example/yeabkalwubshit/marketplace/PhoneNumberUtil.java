@@ -21,13 +21,12 @@ public class PhoneNumberUtil {
                     && split[1].length() == 3 && split[2].length() == 4;
         }
 
-        try {
-            Integer.parseInt(phoneNumberStr);
+        if(phoneNumberStr.length() != 10) return false;
+
+        for(char c: phoneNumberStr.toCharArray()) {
+            if(!Character.isDigit(c)) return false;
         }
-        catch (Exception e) {
-            return false;
-        }
-        return phoneNumberStr.length() == 10;
+        return true;
 
     }
 }

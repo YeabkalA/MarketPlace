@@ -37,6 +37,7 @@ public class UserAccountAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_account_admin);
 
+        setTitle("Profile");
         initUI();
         displayData();
     }

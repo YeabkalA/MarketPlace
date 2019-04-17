@@ -81,13 +81,13 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
         final Item item = items.get(position);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         holder.title.setText(item.getTitle());
-        holder.numBids.setText(Integer.toString(item.getBids().size()));
+        holder.numBids.setText(Integer.toString(item.getBids().size()) + " bids");
         Bid winningBid = item.calculateWinningBid();
         if(winningBid == null) {
-            holder.winningBid.setText("NA");
+            holder.winningBid.setText("No bid yet.");
         } else {
             String winningBidDescription = Item.getDollarRepresentation(winningBid.getValueInCents());
-            holder.winningBid.setText(winningBidDescription);
+            holder.winningBid.setText("Winning: $" + winningBidDescription);
         }
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
