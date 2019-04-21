@@ -112,6 +112,12 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
                                                 NetworkServiceHandler.getInstance();
                                         networkServiceHandler.finalizeItem(item);
                                         holder.finalize.setText("CONTACT BUYER");
+                                        holder.finalize.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                EmailSender.sendEmail(context);
+                                            }
+                                        });
                                         holder.delete.setVisibility(View.GONE);
                                     }
                                 });
@@ -123,6 +129,12 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
                 }
                 case ItemStatus.STATUS_FINALIZING: {
                     holder.finalize.setText("CONTACT BUYER");
+                    holder.finalize.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EmailSender.sendEmail(context);
+                        }
+                    });
                     holder.delete.setVisibility(View.GONE);
                     break;
                 }

@@ -147,6 +147,13 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
                                 builder.show();
                             }
                         });
+
+                        holder.contactOwner.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                EmailSender.sendEmail(context);
+                            }
+                        });
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
