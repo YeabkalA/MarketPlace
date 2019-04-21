@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class Feed extends AppCompatActivity {
     private TextView mFeedNoItemDisplay;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ProgressBar mProgressBar;
 
     private static HashMap<String, Object> dataOrigin;
     private ArrayList<Item> items;
@@ -72,6 +74,7 @@ public class Feed extends AppCompatActivity {
     private void initUI() {
         mFeedNoItemDisplay = findViewById(R.id.feedNoItemDisplay);
         mFeedList = findViewById(R.id.feedItemsList);
+        mProgressBar = findViewById(R.id.feedProgressBar);
     }
 
     private void fillItems(boolean fetchItemFromDataOrigin) {
@@ -98,6 +101,7 @@ public class Feed extends AppCompatActivity {
     }
 
     private void refreshFeed() {
+        mProgressBar.setVisibility(View.VISIBLE);
         mRef.child("items").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,6 +117,7 @@ public class Feed extends AppCompatActivity {
 
             }
         });
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override

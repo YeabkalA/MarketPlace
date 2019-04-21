@@ -108,7 +108,7 @@ public class ItemDetailView extends Activity {
         if (item.getWinningBid() != null) {
             mWinningBid.setText(Item.getDollarRepresentation(item.getWinningBid().getValueInCents()));
         } else {
-            mWinningBid.setText("NA");
+            mWinningBid.setText("-");
         }
         mNumOfBids.setText(Integer.toString(item.getBids().size()));
 

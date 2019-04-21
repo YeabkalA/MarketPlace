@@ -3,14 +3,18 @@ package com.example.yeabkalwubshit.marketplace;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +33,9 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
         public TextView myBid;
         public TextView status;
         public TextView winningBid;
+        public CardView cardView;
+        public Button contactOwner;
+        public Button finalize;
 
         public View layout;
 
@@ -39,6 +46,9 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
             myBid = v.findViewById(R.id.outgoingMyBid);
             status = v.findViewById(R.id.outgoingStatus);
             winningBid = v.findViewById(R.id.outgoingWinningBid);
+            cardView = v.findViewById(R.id.outgoingBidCardView);
+            contactOwner = v.findViewById(R.id.outgoingContact);
+            finalize = v.findViewById(R.id.outgoingFinalize);
         }
     }
 
@@ -75,6 +85,9 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mRef = database.getReference();
 
+        holder.contactOwner.setVisibility(View.GONE);
+        holder.finalize.setVisibility(View.GONE);
+
         mRef.child("items").child(bid.getItemId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,21 +97,75 @@ public class OutgoingBidsAdapter extends RecyclerView.Adapter<OutgoingBidsAdapte
                 boolean betterBid = bid.getValueInCents() >= winningBid.getValueInCents();
                 holder.title.setText(item.getTitle());
                 holder.myBid.setText("My bid: " + Item.getDollarRepresentation(bid.getValueInCents()));
+                NetworkServiceHandler networkServiceHandler = NetworkServiceHandler.getInstance();
+                String userId = networkServiceHandler.getCurrentUsersId();
 
                 int green = Color.rgb(50, 200, 50);
                 int red = Color.rgb(200, 50, 50);
+                int blue = Color.rgb(50, 150, 200);
+                int lightYellow = Color.rgb(255, 255, 153);
+                int lightRed = Color.rgb(255, 230, 230);
+                final int lightGreen = Color.rgb(217, 255, 179);
 
-                holder.status.setBackgroundColor(betterBid ? green : red);
                 holder.winningBid.setText("Winning: " + Item.getDollarRepresentation(winningBid.getValueInCents()));
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, ItemDetailView.class);
-                        ItemDetailView.item = item;
-                        context.startActivity(intent);
+                if(item.getStatus() == null || item.getStatus().getStatus()
+                        .equals(ItemStatus.STATUS_AVAILABLE)) {
+                    holder.status.setBackgroundColor(betterBid ? blue : red);
+
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, ItemDetailView.class);
+                            ItemDetailView.item = item;
+                            context.startActivity(intent);
+                        }
+                    });
+                } else if(item.getStatus().getStatus().equals(ItemStatus.STATUS_FINALIZING)) {
+                    if(betterBid && userId.equals(item.getStatus().getBidWinnerId())) {
+                        //holder.itemView.setBackgroundColor(Color.YELLOW);
+                        holder.cardView.setBackgroundColor(lightYellow);
+                        holder.finalize.setVisibility(View.VISIBLE);
+                        holder.contactOwner.setVisibility(View.VISIBLE);
+
+                        holder.finalize.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                                        .setTitle("Are you sure you want to finalize this item?");
+                                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        NetworkServiceHandler networkServiceHandler =
+                                                NetworkServiceHandler.getInstance();
+                                        networkServiceHandler.completeDeal(item);
+                                        holder.finalize.setVisibility(View.GONE);
+                                        holder.contactOwner.setVisibility(View.GONE);
+                                        holder.cardView.setBackgroundColor(lightGreen);
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(context, ItemDetailView.class);
+                                ItemDetailView.item = item;
+                                context.startActivity(intent);
+                            }
+                        });
+                    } else {
+                        holder.cardView.setBackgroundColor(lightRed);
                     }
-                });
+                } else if(item.getStatus().getStatus().equals(ItemStatus.STATUS_COMPLETED)) {
+                    if(userId.equals(item.getStatus().getBidWinnerId())) {
+                        holder.cardView.setBackgroundColor(lightGreen);
+                    } else {
+                        holder.cardView.setBackgroundColor(lightRed);
+                        holder.winningBid.setVisibility(View.GONE);
+                    }
+                }
 
             }
 

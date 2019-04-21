@@ -108,4 +108,22 @@ public class NetworkServiceHandler {
         ref.child("users").child(ownerId).child("items").child(item.getId()).removeValue();
         ref.child("items").child(item.getId()).removeValue();
     }
+
+    public void finalizeItem(Item item) {
+        DatabaseReference ref = database.getReference();
+        String bidWinnerId = item.getWinningBid().getIssuerId();
+        ref.child("items").child(item.getId()).child("status").child("status")
+                .setValue(ItemStatus.STATUS_FINALIZING);
+        ref.child("items").child(item.getId()).child("status").child("bidWinnerId")
+                .setValue(bidWinnerId);
+
+    }
+
+    public void completeDeal(Item item) {
+        DatabaseReference ref = database.getReference();
+        String bidWinnerId = item.getWinningBid().getIssuerId();
+        ref.child("items").child(item.getId()).child("status").child("status")
+                .setValue(ItemStatus.STATUS_COMPLETED);
+
+    }
 }

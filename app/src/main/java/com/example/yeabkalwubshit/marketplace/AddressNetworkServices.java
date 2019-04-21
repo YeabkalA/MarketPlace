@@ -1,11 +1,15 @@
 package com.example.yeabkalwubshit.marketplace;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import java.net.Proxy;
+import java.io.IOException;
 
 public class AddressNetworkServices {
 
@@ -20,32 +24,39 @@ public class AddressNetworkServices {
         return requestUrl;
     }
 
-    static Double getDistanceBetweenTwoZips(String zip1, String zip2, String units) {
-        try {
-            String requestUrl = buildRequest(zip1, zip2, units);
-            URL obj = new URL(requestUrl);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    static Double getDistanceBetweenTwoZips(String zip1, String zip2, String units) throws Exception{
+        System.out.println("Calling func");
+        String requestUrl = buildRequest(zip1, zip2, units);
+        URL obj = new URL(requestUrl);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-            // optional default is GET
-            con.setRequestMethod("GET");
+        System.out.println("Create connection in Address");
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+        // optional default is GET
+        con.setRequestMethod("GET");
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
+        System.out.println("Request method set with url " + requestUrl);
 
-            String respStr = response.toString();
-            String parsedResponseStr = parseResponse(respStr);
+        System.out.println("Connection is +  " + con);
+        InputStream inputStream = con.getInputStream();
+        System.out.println("Input stream created...");
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(inputStream));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
 
-            return Double.parseDouble(parsedResponseStr);
-        } catch (Exception e) {
-            return -1.0;
+        System.out.println("response string set......");
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
         }
+        in.close();
+
+        String respStr = response.toString();
+        System.out.println("This is the response string" + respStr);
+        String parsedResponseStr = parseResponse(respStr);
+
+        return Double.parseDouble(parsedResponseStr);
+
     }
 
     private static String parseResponse(String respStr) {

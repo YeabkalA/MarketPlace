@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,12 +85,54 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         holder.title.setText(item.getTitle());
         holder.numBids.setText(Integer.toString(item.getBids().size()) + " bids");
-        Bid winningBid = item.calculateWinningBid();
+        final Bid winningBid = item.calculateWinningBid();
         if(winningBid == null) {
             holder.winningBid.setText("No bid yet.");
+            holder.finalize.setVisibility(View.GONE);
         } else {
             String winningBidDescription = Item.getDollarRepresentation(winningBid.getValueInCents());
             holder.winningBid.setText("Winning: $" + winningBidDescription);
+            switch(item.getStatus().getStatus()) {
+                case ItemStatus.STATUS_AVAILABLE: {
+                    holder.finalize.setText("FINALIZE");
+
+                    holder.finalize.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(winningBid == null) {
+                                Toast.makeText(context, "No bid yet for this item.",
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                                        .setTitle("Are you sure you want to finalize this item?");
+                                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        NetworkServiceHandler networkServiceHandler =
+                                                NetworkServiceHandler.getInstance();
+                                        networkServiceHandler.finalizeItem(item);
+                                        holder.finalize.setText("CONTACT BUYER");
+                                        holder.delete.setVisibility(View.GONE);
+                                    }
+                                });
+                                builder.show();
+                            }
+                        }
+                    });
+                    break;
+                }
+                case ItemStatus.STATUS_FINALIZING: {
+                    holder.finalize.setText("CONTACT BUYER");
+                    holder.delete.setVisibility(View.GONE);
+                    break;
+                }
+                case ItemStatus.STATUS_COMPLETED: {
+                    holder.finalize.setVisibility(View.GONE);
+                    holder.delete.setVisibility(View.GONE);
+                    break;
+                }
+            }
+
         }
 
         holder.delete.setOnClickListener(new View.OnClickListener() {

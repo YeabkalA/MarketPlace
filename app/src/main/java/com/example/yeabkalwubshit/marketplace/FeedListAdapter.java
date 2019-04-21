@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -105,7 +103,9 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         double distance = -1;
         System.out.println("OZ" + item.getOwnerZip());
         try {
-            double d = AddressNetworkServices.getDistanceBetweenTwoZips("75240", "75062", "mi");
+            System.out.println("About to call...");
+            Double d = AddressNetworkServices.getDistanceBetweenTwoZips("75240", "75062", "km");
+            System.out.println("Got distance of " + d);
             distance = d;
             System.out.println("Gotzz" + d);
         } catch(Exception e) {

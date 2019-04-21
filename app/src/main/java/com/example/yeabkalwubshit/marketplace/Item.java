@@ -16,6 +16,16 @@ public class Item implements DatabaseStorable {
     private String postedOn;
     private Bid winningBid;
 
+    public ItemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ItemStatus status) {
+        this.status = status;
+    }
+
+    private ItemStatus status;
+
     public List<String> getImageUrls() {
         return imageUrls;
     }
@@ -134,6 +144,8 @@ public class Item implements DatabaseStorable {
     public Item() {
         bids = new ArrayList<>();
         imageUrls = new ArrayList<>();
+        status = new ItemStatus(ItemStatus.STATUS_AVAILABLE,
+                "0");
     }
 
     public String getId() {
@@ -249,6 +261,7 @@ public class Item implements DatabaseStorable {
 
         ret.put("category", category);
         ret.put("ownerUserName", ownerUserName);
+        ret.put("status", status.createMap());
 
         return ret;
     }
@@ -266,6 +279,13 @@ public class Item implements DatabaseStorable {
         List<String> imageURLs = (List<String>) map.get("imageURL");
         String category = (String) map.get("category");
         String ownerUserName = (String) map.get("ownerUserName");
+
+        if(map.containsKey("status")) {
+            ItemStatus itemStatus = new ItemStatus();
+            HashMap<String, Object> itemStatusMap = (HashMap) map.get("status");
+            itemStatus.populateFromMap(itemStatusMap);
+            setStatus(itemStatus);
+        }
 
         if(map.containsKey("bids")) {
             System.out.println("BIDS" + map.get("bids").toString());
