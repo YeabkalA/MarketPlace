@@ -74,6 +74,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/outgoingStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textStyle="bold|italic"/>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

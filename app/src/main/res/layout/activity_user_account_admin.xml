@@ -122,4 +122,19 @@
         android:id="@+id/adminEditState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_margin="10px"
+        android:id="@+id/updateImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/darkGreen"
+        android:text="Change Image" />
+
+    <Button
+        android:layout_margin="10px"
+        android:id="@+id/changeAccountDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change My Account Info" />
 </LinearLayout>

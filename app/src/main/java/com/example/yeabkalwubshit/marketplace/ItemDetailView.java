@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -163,7 +164,6 @@ public class ItemDetailView extends Activity {
                 networkServiceHandler.bidForItem(bid);
             }
         });
-        alertBuilder.show();
-
+        alertBuilder.show().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
     }
 }

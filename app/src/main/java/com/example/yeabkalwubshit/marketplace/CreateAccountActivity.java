@@ -77,6 +77,20 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         setTitle("Create Account");
 
+        final ActionBar actionBar = getSupportActionBar();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0;; i++) {
+                    try {
+                        Thread.sleep(100);
+                    } catch(Exception e) {}
+                    actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(i,i,i)));
+                }
+            }
+        });
+        thread.start();
 
         dateUtil = new DateUtil();
 

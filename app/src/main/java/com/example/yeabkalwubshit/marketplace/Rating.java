@@ -3,16 +3,19 @@ package com.example.yeabkalwubshit.marketplace;
 import java.util.HashMap;
 
 public class Rating implements DatabaseStorable{
-    private double value;
-    private int count;
+    private long value;
+    private long count;
 
     public Rating() {
         this.value = 0;
         this.count = 0;
     }
 
+    public long getValue() { return value; }
+
     public void update(int newRating) {
-        value = ((value * count) + newRating)/(count + 1);
+        value = Math.round(1.0 * (((value * count) + newRating))/(count + 1));
+        count++;
     }
 
     public String getStringRep() {
@@ -29,8 +32,8 @@ public class Rating implements DatabaseStorable{
     }
 
     public void populateFromMap(HashMap<String, Object> map) {
-        this.value = (double) map.get("value");
-        this.count = (int) map.get("count");
+        this.value = (long) map.get("value");
+        this.count = (long) map.get("count");
     }
 
     public static Rating updateMapRatingWithNewRating(HashMap<String, Object> map, int newRating) {

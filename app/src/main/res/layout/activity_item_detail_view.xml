@@ -64,9 +64,10 @@
 
                     <TextView
                         android:id="@+id/itemDetailTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10px"
+                        android:paddingHorizontal="15px"
                         android:text="TextView"
                         android:textStyle="bold|italic" />
 

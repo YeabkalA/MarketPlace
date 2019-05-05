@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
         public TextView winningBid;
         public Button finalize;
         public Button delete;
+        public TextView statusText;
 
         public NetworkServiceHandler networkServiceHandler;
 
@@ -48,7 +50,9 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
             winningBid = v.findViewById(R.id.manageItemsWinningBid);
             finalize = v.findViewById(R.id.manageItemsFinalize);
             delete = v.findViewById(R.id.manageItemsDelete);
+            statusText = v.findViewById(R.id.manageItemStatusText);
             networkServiceHandler = NetworkServiceHandler.getInstance();
+
         }
     }
 
@@ -95,7 +99,6 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
             switch(item.getStatus().getStatus()) {
                 case ItemStatus.STATUS_AVAILABLE: {
                     holder.finalize.setText("FINALIZE");
-
                     holder.finalize.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -121,7 +124,7 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
                                         holder.delete.setVisibility(View.GONE);
                                     }
                                 });
-                                builder.show();
+                                builder.show().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                             }
                         }
                     });
@@ -136,11 +139,13 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
                         }
                     });
                     holder.delete.setVisibility(View.GONE);
+                    holder.statusText.setText("Contact the buyer to complete transaction.");
                     break;
                 }
                 case ItemStatus.STATUS_COMPLETED: {
                     holder.finalize.setVisibility(View.GONE);
                     holder.delete.setVisibility(View.GONE);
+                    holder.statusText.setText("Item sold.");
                     break;
                 }
             }
@@ -150,12 +155,21 @@ public class ManageMyItemsAdapter extends RecyclerView.Adapter<ManageMyItemsAdap
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Bid> bids = new ArrayList<>(item.getBids());
-                for(Bid bid: bids) {
-                    holder.networkServiceHandler.removeBidFromUserData(bid);
-                }
-                holder.networkServiceHandler.removeItem(item);
-                remove(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                        .setTitle("Are you sure you want to delete this item?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ArrayList<Bid> bids = new ArrayList<>(item.getBids());
+                        for(Bid bid: bids) {
+                            holder.networkServiceHandler.removeBidFromUserData(bid);
+                        }
+                        holder.networkServiceHandler.removeItem(item);
+                        remove(position);
+                    }
+                });
+                builder.show().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
             }
         });
 

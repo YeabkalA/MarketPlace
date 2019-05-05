@@ -90,7 +90,9 @@ public class Feed extends AppCompatActivity {
 
                 Item item = new Item();
                 item.populateFromMap(itemData);
-
+                if(!item.getStatus().getStatus().equals(ItemStatus.STATUS_AVAILABLE)) {
+                    continue;
+                }
                 items.add(item);
             }
         }

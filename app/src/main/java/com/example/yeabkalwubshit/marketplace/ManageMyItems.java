@@ -43,7 +43,6 @@ public class ManageMyItems extends AppCompatActivity {
 
         mItemList = findViewById(R.id.manageItemsList);
         mItemList.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         mItemList.setLayoutManager(layoutManager);
 

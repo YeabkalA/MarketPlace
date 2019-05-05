@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#ff6f00</item>
-        <item name="colorPrimaryDark">#c43e00</item>
-        <item name="colorSecondary">#d84315</item>
-        <item name="colorAccent">#d84315</item>
+        <item name="colorPrimary">#00838f</item>
+        <item name="colorPrimaryDark">#005662</item>
+        <item name="colorSecondary">#4fb3bf</item>
+        <item name="colorAccent">#4fb3bf</item>
         <item name="android:colorButtonNormal">@color/blueSecLight</item>
         <item name="android:editTextColor">#000000</item>
         <item name="android:buttonCornerRadius">4pt</item>

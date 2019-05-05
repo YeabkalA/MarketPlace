@@ -1,11 +1,14 @@
 package com.example.yeabkalwubshit.marketplace;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +19,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -94,25 +102,73 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final Item item = items.get(position);
         holder.title.setText(item.getTitle());
         holder.price.setText(Item.getDollarRepresentation(item.getPriceInCents()));
-        double distance = -1;
+        holder.price.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
         System.out.println("OZ" + item.getOwnerZip());
-        try {
-            System.out.println("About to call...");
-            Double d = AddressNetworkServices.getDistanceBetweenTwoZips("75240", "75062", "km");
-            System.out.println("Got distance of " + d);
-            distance = d;
-            System.out.println("Gotzz" + d);
-        } catch(Exception e) {
-            System.out.println("Address calc exce:" + e.getMessage());
+        String userId = NetworkServiceHandler.getInstance().getCurrentUsersId();
+        if(!userId.equals(item.getOwnerId())) {
+            try {
+
+                final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+                dbRef.child("users").child(userId)
+                        .addListenerForSingleValueEvent(
+                                new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        HashMap<String, Object> userData = (HashMap) dataSnapshot.getValue();
+                                        final User user = new User();
+                                        user.populateFromMap(userData);
+                                        final String userZip = user.getAddress().getZip();
+
+                                        dbRef.child("users").child(item.getOwnerId()).child("address")
+                                                .child("zip").addListenerForSingleValueEvent(
+                                                new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        final String ownerZip = (String) dataSnapshot.getValue();
+                                                        Thread thread = new Thread(
+                                                                new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        try {
+                                                                            //double d = AddressNetworkServices.getDistanceBetweenTwoZips(
+                                                                                    //ownerZip, userZip, "mi");
+                                                                            double d = 0;
+                                                                            System.out.println("Distance turned is " + d);
+                                                                            holder.distance.setText(Double.toString(d) + " miles away");
+                                                                        } catch(Exception e) {
+                                                                        }
+                                                                    }
+                                                                }
+                                                        );
+                                                        thread.start();
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    }
+                                                }
+                                        );
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                }
+                        );
+            } catch(Exception e) {
+            }
+        } else {
+            holder.distance.setText("");
         }
 
-        holder.distance.setText(Double.toString(distance));
 
         if(item.getBids().size()>0) {
             Bid winningBid = item.calculateWinningBid();
@@ -122,6 +178,21 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
         }
 
         holder.newUsed.setText(item.getCondition());
+        FirebaseDatabase.getInstance().getReference().child("users").child(item.getOwnerId()).child("rating")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        HashMap<String, Object> data = (HashMap) dataSnapshot.getValue();
+                        Rating rating = new Rating();
+                        rating.populateFromMap(data);
+                        setRating(rating, holder);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
         holder.rating.setRating(position%5 + 1);
         holder.category.setText(item.getCategory() == null ? "NO CATEG " : item.getCategory());
         holder.posterUserName.setText(item.getOwnerUserName() == null ? "NOT AVAIL" : item.getOwnerUserName());
@@ -152,6 +223,10 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
             ViewPagerAdapter adapter = new ViewPagerAdapter(this.context, viewPagerList);
             holder.viewPager.setAdapter(adapter);
         }
+    }
+
+    void setRating(Rating rating, ViewHolder holder) {
+        holder.rating.setRating(rating.getValue());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

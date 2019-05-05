@@ -1,5 +1,6 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 public class AddressNetworkServices {
 
-    private static final String API_KEY = "I0OyFyPaJ6aovf11UOGzHUA81OHACv7wdu32QZ3SWT3SvU4gwvoAvMJ6WbOp2aua";
+    private static final String API_KEY = "4IPodsSOa5mbKGKRV9jnHBWCJXcGWv9ZHsC70sz7V1xoYkOCaYejfCTyfGSBW11m";
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String RESPONSE_DISTANCE_KEY = "distance";
 
@@ -30,26 +31,36 @@ public class AddressNetworkServices {
         URL obj = new URL(requestUrl);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-        System.out.println("Create connection in Address");
-
-        // optional default is GET
-        con.setRequestMethod("GET");
-
-        System.out.println("Request method set with url " + requestUrl);
-
-        System.out.println("Connection is +  " + con);
-        InputStream inputStream = con.getInputStream();
-        System.out.println("Input stream created...");
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(inputStream));
-        String inputLine;
+        InputStream inputStream;
         StringBuffer response = new StringBuffer();
 
-        System.out.println("response string set......");
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+        try {
+            System.out.println("Create connection in Address");
+
+            // optional default is GET
+            con.setRequestMethod("GET");
+
+            System.out.println("Request method set with url " + requestUrl);
+
+            System.out.println("Connection is +  " + con);
+            inputStream = new BufferedInputStream(con.getInputStream());
+            System.out.println("Input stream created...");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(inputStream));
+            String inputLine;
+            response = new StringBuffer();
+            System.out.println("response string set......");
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } catch(Exception e) {
+            System.out.println("PROXY " + e.toString());
+        } finally {
+            con.disconnect();
         }
-        in.close();
+
+
 
         String respStr = response.toString();
         System.out.println("This is the response string" + respStr);
