@@ -1,5 +1,8 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import com.example.yeabkalwubshit.marketplace.objects.Item;
+import com.example.yeabkalwubshit.marketplace.tools.ItemSearcher;
+
 import org.junit.Before;
 import org.junit.Test;
 

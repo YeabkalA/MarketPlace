@@ -1,5 +1,7 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import com.example.yeabkalwubshit.marketplace.tools.EmailUtil;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

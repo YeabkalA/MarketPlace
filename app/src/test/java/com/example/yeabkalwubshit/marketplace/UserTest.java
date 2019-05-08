@@ -1,5 +1,8 @@
 package com.example.yeabkalwubshit.marketplace;
 
+import com.example.yeabkalwubshit.marketplace.objects.Address;
+import com.example.yeabkalwubshit.marketplace.objects.User;
+
 import org.junit.Before;
 import org.junit.Test;
 

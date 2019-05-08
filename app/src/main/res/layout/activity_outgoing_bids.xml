@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OutgoingBids">
+    tools:context=".activities.OutgoingBids">
 
     <ProgressBar
         android:id="@+id/outgoingBidsProgress"
@@ -18,4 +18,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"/>
+
 </LinearLayout>

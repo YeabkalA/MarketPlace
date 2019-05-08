@@ -2,16 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainback"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroSplashScreen"
+    tools:context=".activities.IntroSplashScreen"
+    android:gravity="center"
     android:background="@drawable/background">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="208dp"
+        android:layout_height="222dp"
+        android:src="@drawable/logo_new" />
 
     <TextView
         android:id="@+id/introText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Marketplace" />
+        android:fontFamily="@font/gugi_regular"
+        android:gravity="center"
+        android:text="CickNBid"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
 </LinearLayout>

@@ -16,28 +16,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:name=".SampleRecentSuggestionProvider"
-            android:authorities="com.example.yeabkalwubshit.marketplace.SampleRecentSuggestionProvider" />
+            android:name=".tools.SampleRecentSuggestionProvider"
+            android:authorities="com.example.yeabkalwubshit.marketplace.tools.SampleRecentSuggestionProvider" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name">
         </activity>
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".activities.CreateAccountActivity" />
         <activity
-            android:name=".Feed" />
-        <activity android:name=".PostItemActivity" />
+            android:name=".activities.Feed" />
+        <activity android:name=".activities.PostItemActivity" />
         <activity
-            android:name=".ItemDetailView"
+            android:name=".activities.ItemDetailView"
             android:label="@string/title_activity_item_detail_view" />
-        <activity android:name=".UserAccountAdmin" />
+        <activity android:name=".activities.UserAccountAdmin" />
         <activity
-            android:name=".OutgoingBids"
+            android:name=".activities.OutgoingBids"
             android:label="@string/title_activity_outgoing_bids" />
         <activity
-            android:name=".ManageMyItems"
+            android:name=".activities.ManageMyItems"
             android:label="@string/title_activity_manage_my_items" />
-        <activity android:name=".IntroSplashScreen"
+        <activity android:name=".activities.IntroSplashScreen"
             android:theme="@android:style/Theme.NoTitleBar"
             android:noHistory="true">
             <intent-filter>
